@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[Usuario]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Nome] NVARCHAR(150) NOT NULL, 
+    [Cpf] NVARCHAR(20) NOT NULL, 
+    [Telefone] NVARCHAR(50) NULL, 
+    [Login] NVARCHAR(50) NOT NULL, 
+    [Senha] NVARCHAR(50) NOT NULL, 
+    [Ativo] BIT NOT NULL DEFAULT 0, 
+    [Gerente] BIT NOT NULL DEFAULT 0
+)
