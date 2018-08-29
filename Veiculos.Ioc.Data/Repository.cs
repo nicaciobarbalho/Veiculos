@@ -13,6 +13,8 @@ namespace Veiculos.Ioc.Data
         public Repository()
         {
             this.Context = Activator.CreateInstance<IocDbContext>();
+            //this.Context.Configuration.ProxyCreationEnabled = false;
+            this.Context.Configuration.AutoDetectChangesEnabled = true;
             this.Model = this.Context.Set<T>();
         }
         public Repository(DbContext Context)

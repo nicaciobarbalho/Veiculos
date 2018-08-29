@@ -13,7 +13,7 @@ namespace Veiculos.Test
         {
             Veiculos.Ioc.Service.ServiceUsuario serviceUsuario = new Ioc.Service.ServiceUsuario();
             Ioc.Core.Data.Usuario usuario = serviceUsuario.Usuario(1);
-            bool result = (usuario != null && usuario.Id > 0);
+            bool result = (usuario != null);
             // assert  
             Assert.AreEqual(true, result);
         }
