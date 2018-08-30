@@ -72,10 +72,6 @@
       <Project>{8edd7aa9-80b7-4fc9-9c3b-1b4852a2b919}</Project>
       <Name>Veiculos.Ioc.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Veiculos.Ioc.Data\Veiculos.Ioc.Data.csproj">
-      <Project>{ac52c362-3d3e-445a-9052-b775ba8c9926}</Project>
-      <Name>Veiculos.Ioc.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Veiculos.Ioc.Service\Veiculos.Ioc.Service.csproj">
       <Project>{895acc7f-3445-4821-bba5-941e8d01db0f}</Project>
       <Name>Veiculos.Ioc.Service</Name>

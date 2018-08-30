@@ -5,22 +5,24 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using Veiculos.Ioc.Core;
+using System.Data.Entity.Core;
 
 namespace Veiculos.Ioc.Data
 {
-    public abstract class Repository<T> : IRepository<T> where T : class, new()
+    public class Repository<T> : IRepository<T> where T : class, new()
     {
+        DbSet<T> model;
         public Repository()
         {
             this.Context = Activator.CreateInstance<IocDbContext>();
-            //this.Context.Configuration.ProxyCreationEnabled = false;
-            this.Context.Configuration.AutoDetectChangesEnabled = true;
             this.Model = this.Context.Set<T>();
+          
         }
         public Repository(DbContext Context)
         {
             this.Context = Context;
             this.Model = this.Context.Set<T>();
+         
         }
         public T Insert(T model)
         {
@@ -28,60 +30,50 @@ namespace Veiculos.Ioc.Data
             this.Save();
             return model;
         }
-        public bool Edit(T model)
+        public int Edit(T model)
         {
-            bool status = false;
             this.Context.Entry<T>(model).State = EntityState.Modified;
-            if (this.Save() > 0)
-            {
-                status = true;
-            }
-            return status;
+            
+            return this.Save();
         }
-        public bool Delete(T model)
+        public int Delete(T model)
         {
-            bool status = false;
-            this.Context.Entry<T>(model).State = EntityState.Deleted;
-            if (this.Save() > 0)
-            {
-                status = true;
-            }
-            return status;
+            this.Context.Entry<T>(model).State = EntityState.Deleted;           
+            return this.Save();
         }
-        public bool Delete(System.Linq.Expressions.Expression<Func<T, bool>> where)
+        public int Delete(System.Linq.Expressions.Expression<Func<T, bool>> where)
         {
-            bool status = false;
             T model = this.Model.Where<T>(where).FirstOrDefault<T>();
             if (model != null)
             {
-                status = Delete(model);
+                return Delete(model);
             }
-            return status;
+            return 0;
         }
-        public bool Delete(params object[] Keys)
+        public int Delete(params object[] Keys)
         {
-            bool status = false;
             T model = this.Model.Find(Keys);
             if (model != null)
             {
-                status = Delete(model);
+                return Delete(model);
             }
-            return status;
+            return 0;
         }
         public T Find(params object[] Keys)
         {
             return this.Model.Find(Keys);
         }
-        public T Find(System.Linq.Expressions.Expression<Func<T, bool>> where)
+        public  T FindById(int id)
         {
-            return this.Model.Where<T>(where).FirstOrDefault<T>();
-        }
-        public virtual T FindById(long id)
-        {
-            return Context.Set<T>().Find(id);
+            /*dynamic obj = ((default(T) == null) ? Activator.CreateInstance<T>() : default(T));
+            obj.Id = id;
+            object o = (T)Convert.ChangeType(obj, typeof(T));
+            object f = this.Model.Find(id);*/
+            return this.Model.Find(id);
+        
         }
         public virtual T FindOne(Expression<Func<T, bool>> where = null)
-        {
+        {         
             return FindAll(where).FirstOrDefault();
         }
         public virtual IQueryable<T> FindAll(Expression<Func<T, bool>> where = null)
@@ -124,15 +116,22 @@ namespace Veiculos.Ioc.Data
         {
             return this.Context.Set<E>();
         }
-        public System.Data.Entity.DbContext Context
+        public DbContext Context
         {
             get;
             private set;
         }
-        public System.Data.Entity.DbSet<T> Model
+        public DbSet<T> Model
         {
-            get;
-            private set;
+            get
+            {
+                if (model == null)
+                {
+                    model = Context.Set<T>();
+                }
+                return model;
+            }
+            private set { model = value; }
         }
         public void Dispose()
         {

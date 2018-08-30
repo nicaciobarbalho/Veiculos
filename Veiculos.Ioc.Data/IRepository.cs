@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace Veiculos.Ioc.Data
 {
-    public interface IRepository<T> : IDisposable where T : class, new()
+    public interface IRepository<T> : IDisposable where T : class
     {
         T Create();
         DbSet<E> Create<E>() where E : class, new();
         T Insert(T model);
-        bool Edit(T model);
-        bool Delete(T model);
-        bool Delete(Expression<Func<T, bool>> where);
-        bool Delete(params object[] Keys);
+        int Edit(T model);
+        int Delete(T model);
+        int Delete(Expression<Func<T, bool>> where);
+        int Delete(params object[] Keys);
         T Find(params object[] Keys);
-        T Find(Expression<Func<T, bool>> where);
         T FindOne(Expression<Func<T, bool>> where = null);
-        T FindById(long id);
+        T FindById(int id);
         IQueryable<T> FindAll(Expression<Func<T, bool>> where = null);
         IQueryable<T> Query();
         IQueryable<T> Query(params Expression<Func<T, object>>[] includes);
