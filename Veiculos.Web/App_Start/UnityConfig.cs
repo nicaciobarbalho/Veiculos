@@ -1,9 +1,10 @@
 ﻿using System.Web.Mvc;
-using Microsoft.Practices.Unity;
-using Unity.Mvc5;
 using Microsoft.Owin.Security;
 using System.Web;
 using System.Diagnostics.CodeAnalysis;
+using Unity;
+using Unity.Injection;
+using Unity.Mvc5;
 
 namespace Veiculos.Web.App_Start
 {
@@ -19,7 +20,7 @@ namespace Veiculos.Web.App_Start
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication));
-            container.RegisterType<IAccount>();
+            //container.RegisterType<IAccount, Account>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

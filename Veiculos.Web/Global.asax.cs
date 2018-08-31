@@ -17,7 +17,7 @@ namespace Veiculos.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+            App_Start.UnityConfig.RegisterComponents();
         }
     }
 }

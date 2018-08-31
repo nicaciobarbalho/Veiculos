@@ -9,6 +9,16 @@ namespace Veiculos.Test
     public class UnitUsuarioTest
     {
         [TestMethod]
+        public void TestDeleteUsuario()
+        {
+            Ioc.Core.Data.Usuario usuario = new Ioc.Core.Data.Usuario() { Id = 2 };
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Usuario> Service = new Ioc.Service.Service<Ioc.Core.Data.Usuario>();
+            bool compare = (Service.Apagar(usuario) > 0);
+            // assert  
+            Assert.IsTrue(compare);
+        }
+
+        [TestMethod]
         public void TestRecuperarUsuario()
         {
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Usuario> service = new Ioc.Service.Service<Ioc.Core.Data.Usuario>();
@@ -37,16 +47,6 @@ namespace Veiculos.Test
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Usuario> service = new Ioc.Service.Service<Ioc.Core.Data.Usuario>();
 
             bool compare = (service.Atualizar(usuario) > 0);
-            // assert  
-            Assert.IsTrue(compare);
-        }
-
-        [TestMethod]
-        public void TestDeleteUsuario()
-        {
-            Ioc.Core.Data.Usuario usuario = new Ioc.Core.Data.Usuario() { Id = 2 };
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Usuario> Service = new Ioc.Service.Service<Ioc.Core.Data.Usuario>();
-            bool compare = (Service.Apagar(usuario) > 0);
             // assert  
             Assert.IsTrue(compare);
         }
