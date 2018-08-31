@@ -11,6 +11,7 @@ namespace Veiculos.Ioc.Service.Interface
     {
         IQueryable<T> BuscarTodos();
         T Buscar(int id);
+        T Buscar(System.Linq.Expressions.Expression<Func<T, bool>> where = null);
         T Inserir(T modelo);
         int Atualizar(T modelo);
         int Apagar(T modelo);

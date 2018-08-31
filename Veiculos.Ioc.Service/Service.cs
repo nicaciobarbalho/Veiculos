@@ -47,7 +47,12 @@ namespace Veiculos.Ioc.Service
 
         public T Buscar(int id)
         {
-            return this.usuarioRepository.FindById(1);
+            return this.usuarioRepository.FindById(id);
+        }
+
+        public T Buscar(System.Linq.Expressions.Expression<Func<T, bool>> where = null)
+        {
+            return this.usuarioRepository.FindOne(where);
         }
 
     }

@@ -17,9 +17,11 @@ namespace Veiculos.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IAuthenticationManager _auth;
 
-        public AccountController()
+        public AccountController(IAuthenticationManager auth)
         {
+            this._auth = auth;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -78,7 +80,7 @@ namespace Veiculos.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -87,7 +89,27 @@ namespace Veiculos.Web.Controllers
 
             // Isso não conta falhas de login em relação ao bloqueio de conta
             // Para permitir que falhas de senha acionem o bloqueio da conta, altere para shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Usuario> service = new Ioc.Service.Service<Ioc.Core.Data.Usuario>();
+
+            Ioc.Core.Data.Usuario usuario = service.Buscar(f => f.Ativo == true && f.Login == model.Email && f.Senha == model.Password);
+            if(usuario != null && usuario.Id > 0)
+            {
+                var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, model.Email), }, DefaultAuthenticationTypes.ApplicationCookie);
+
+                this._auth.SignIn(new AuthenticationProperties
+                {
+                    IsPersistent = model.RememberMe
+                }, identity);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
+            /*
             switch (result)
             {
                 case SignInStatus.Success:
@@ -101,6 +123,7 @@ namespace Veiculos.Web.Controllers
                     ModelState.AddModelError("", "Tentativa de login inválida.");
                     return View(model);
             }
+            */
         }
 
         //
