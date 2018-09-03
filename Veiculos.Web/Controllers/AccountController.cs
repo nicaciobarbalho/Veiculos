@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -17,11 +18,10 @@ namespace Veiculos.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private readonly IAuthenticationManager _auth;
 
-        public AccountController(IAuthenticationManager auth)
+        public AccountController()
         {
-            this._auth = auth;
+           
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -95,14 +95,11 @@ namespace Veiculos.Web.Controllers
             Ioc.Core.Data.Usuario usuario = service.Buscar(f => f.Ativo == true && f.Login == model.Email && f.Senha == model.Password);
             if(usuario != null && usuario.Id > 0)
             {
-                var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, model.Email), }, DefaultAuthenticationTypes.ApplicationCookie);
+                //var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, model.Email), }, DefaultAuthenticationTypes.ApplicationCookie);
+                IdentitySignIn(usuario.Id, usuario.Login);
+                    return RedirectToLocal(returnUrl);
 
-                this._auth.SignIn(new AuthenticationProperties
-                {
-                    IsPersistent = model.RememberMe
-                }, identity);
-
-                return RedirectToAction("Index", "Home");
+                
             }
             else
             {
@@ -486,7 +483,20 @@ namespace Veiculos.Web.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        private void IdentitySignIn(int userId, string userLogin)
+        {
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.PrimarySid, userId.ToString()));
+            claims.Add(new Claim(ClaimTypes.Name, userLogin));
 
+            var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+
+            //authenticationManager.SignIn(new AuthenticationProperties()
+            //{
+            //    ExpiresUtc = DateTime.UtcNow.AddDays(200),
+            //    IsPersistent = true
+            //}, identity);
+        }
         internal class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
