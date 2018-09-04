@@ -507,7 +507,7 @@ namespace Veiculos.Web.Controllers
             var ctx = Request.GetOwinContext();
             var auth = ctx.Authentication;
 
-            auth.SignIn(new AuthenticationProperties { IsPersistent = false, ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddMinutes(1)) }, identity);
+            auth.SignIn(new AuthenticationProperties { IsPersistent = false, ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddMinutes(30)) }, identity);
           
         }
         internal class ChallengeResult : HttpUnauthorizedResult

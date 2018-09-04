@@ -263,6 +263,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Cadastros\CadastrosAreaRegistration.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -291,6 +292,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\Comprar\Controllers\ComprarController.cs" />
+    <Compile Include="Areas\Comprar\Models\Veiculo.cs" />
+    <Compile Include="Areas\Comprar\VendaAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -347,6 +351,15 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Comprar\Views\web.config" />
+    <Content Include="Areas\Cadastros\Views\web.config" />
+    <Content Include="Areas\Comprar\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Comprar\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Comprar\Views\Comprar\Index.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -356,6 +369,7 @@
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\knockout.validation.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
@@ -397,9 +411,13 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Scripts\knockout.validation.min.js.map" />
+    <Content Include="Views\Comprar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Cadastros\Controllers\" />
+    <Folder Include="Areas\Cadastros\Models\" />
+    <Folder Include="Areas\Cadastros\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
