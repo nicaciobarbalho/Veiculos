@@ -28,6 +28,8 @@ namespace Veiculos.Web
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
             };
+
+            System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier = System.Security.Claims.ClaimsIdentity.DefaultNameClaimType;
         }
 
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
