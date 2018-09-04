@@ -43,8 +43,8 @@ namespace Veiculos.Web.Controllers
         // GET api/Me
         public GetViewModel Get()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            return new GetViewModel() { Hometown = user.Hometown };
+            //  var user = UserManager.FindById(User.Identity.GetUserId());
+            return null;// new GetViewModel() { Hometown = user.Hometown };
         }
     }
 }

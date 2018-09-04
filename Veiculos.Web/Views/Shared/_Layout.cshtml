@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Owin.Security
+<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -18,13 +19,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Veículos", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>
+@{
+    
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Gerente"))
+        {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros<span class="caret"></span></a>
+                                    <ul  class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li class="dropdown-item" href="#">@Html.ActionLink("Fabricante", "Index", "Help", new { area = "HelpPage" }, null)</li>
+                                        <li class="dropdown-item" href="#">@Html.ActionLink("Veículo", "Index", "Help", new { area = "HelpPage" }, null)</li>
+                                        <li class="nav-divider"></li>
+                                        <li class="dropdown-item" href="#">@Html.ActionLink("Usuário", "Index", "Help", new { area = "HelpPage" }, null)</li>
+                                      </ul>                         
+                                </li>
+        }
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transações<span class="caret"></span></a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li class="dropdown-item" href="#">@Html.ActionLink("Venda", "Index", "Help", new { area = "HelpPage" }, null)</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Relatórios<span class="caret"></span></a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li class="dropdown-item" href="#">@Html.ActionLink("Venda", "Index", "Help", new { area = "HelpPage" }, null)</li>
+                                </ul>
+                            </li>
+    }
+}
                 </ul>
+                     
+                
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -34,7 +66,7 @@
         @RenderSection("SPAViews", required: false)
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Sistema de revenda de veículos</p>
         </footer>
     </div>
 

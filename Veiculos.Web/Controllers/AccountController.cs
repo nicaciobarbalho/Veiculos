@@ -96,7 +96,7 @@ namespace Veiculos.Web.Controllers
             if(usuario != null && usuario.Id > 0)
             {
                 //var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, model.Email), }, DefaultAuthenticationTypes.ApplicationCookie);
-                IdentitySignIn(usuario.Id, usuario.Login);
+                IdentitySignIn(usuario.Id, usuario.Login, usuario.Gerente);
                     return RedirectToLocal(returnUrl);
 
                 
@@ -483,7 +483,7 @@ namespace Veiculos.Web.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        private void IdentitySignIn(int userId, string userLogin)
+        private void IdentitySignIn(int userId, string userLogin, bool gerente)
         {
             //var claims = new List<Claim>();
             //claims.Add(new Claim(ClaimTypes.PrimarySid, userId.ToString()));
@@ -493,16 +493,21 @@ namespace Veiculos.Web.Controllers
                 {
                     new Claim(ClaimTypes.Name,userLogin),
 
-                    new Claim(ClaimTypes.Role, "User", "Admin", "SuperAdmin"),
+                  
                     new Claim(ClaimTypes.PrimarySid,userId.ToString()),
                 };
+
+            if (gerente)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "Gerente"));
+            }
 
             var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
 
             var ctx = Request.GetOwinContext();
             var auth = ctx.Authentication;
 
-            auth.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+            auth.SignIn(new AuthenticationProperties { IsPersistent = false, ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddMinutes(1)) }, identity);
           
         }
         internal class ChallengeResult : HttpUnauthorizedResult
