@@ -40,6 +40,9 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 
+# Web.config
+Web.config
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/

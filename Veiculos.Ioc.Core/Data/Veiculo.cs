@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Veiculos.Ioc.Core.Data
@@ -13,6 +14,9 @@ namespace Veiculos.Ioc.Core.Data
         public string Foto { get; set; }
         public int Cilindradas { get; set; }
         public int IdStatusVeiculo { get; set; }
+        public int IdModelo { get; set; }
+        [ForeignKey("IdModelo")]
+        public virtual Modelo Modelo { get; set; }
     }
 
 }

@@ -6,27 +6,26 @@ using System.Web;
 
 namespace Veiculos.Web.Models
 {
-    public class VeiculoModel
+    public class VeiculoModel : BaseVeiculosModel
     {
+      
         [Required(ErrorMessage = "Informe a placa do veículo!")]
         [RegularExpression(@"^[a-zA-Z]{3}$", ErrorMessage = "Informe uma placa válida!")]
         [Display(Name = "Placa")]
         public string Placa { get; set; }
 
-       //[Required]
-        [Display(Name = "Modelo")]
-        public string Modelo { get; set; }
-
-        //[Required]
+        [Required]
         [Display(Name = "Ano")]
         public int Ano { get; set; }
 
-        //[Required]
+        [Required]
         [Display(Name = "Cilindradas")]
         public int Cilindradas { get; set; }
 
-        //[Required]
+        [Required]
         [Display(Name = "Chassi")]
-        public int Chassi { get; set; }
+        public string Chassi { get; set; }
+
+        public ModeloModel Modelo { get; set; }
     }
 }

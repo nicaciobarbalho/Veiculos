@@ -14,8 +14,8 @@ namespace Veiculos.Web.Controllers
         {
             return View();
         }
-
-        public ActionResult Vender(Veiculos.Ioc.Core.Data.Veiculo veiculo)
+        [HttpPost]
+        public ActionResult Index(Models.VeiculoModel model)
         {
             return View();
         }
@@ -48,7 +48,7 @@ namespace Veiculos.Web.Controllers
                 return View("Index");
             }
 
-                return View("Vender", veiculo);
+                return View("Index", new Models.VeiculoModel() { Id = veiculo.Id, Ano = veiculo.AnoFabricacao, Chassi = veiculo.Chassi, Cilindradas = veiculo.Cilindradas, Placa = veiculo.Placa, Modelo = new Models.ModeloModel() { Id = veiculo.Modelo.Id, Descricao = veiculo.Modelo.Descricao } });
         }
 
 
