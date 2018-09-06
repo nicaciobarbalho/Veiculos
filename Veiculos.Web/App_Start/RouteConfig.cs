@@ -20,23 +20,6 @@ namespace Veiculos.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-           "PaginaComprar",
-            url: "Comprar/",
-            defaults: new { controller = "Comprar", action = "Index" }
-           );
-
-            routes.MapRoute(
-        "StartBrowse",
-        "Comprar/{s1}",
-        new
-        {   
-            controller = "Comprar",
-            action = "Index",            
-            s1 = UrlParameter.Optional,
-        });
-
         }
     }
 }

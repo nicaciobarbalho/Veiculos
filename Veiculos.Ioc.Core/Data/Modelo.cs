@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Veiculos.Ioc.Core.Data
@@ -10,5 +11,7 @@ namespace Veiculos.Ioc.Core.Data
         public string Descricao { get; set; }
         public int IdTipoVeiculo { get; set; }
         public int IdFabricante { get; set; }
+        [ForeignKey("IdFabricante")]
+        public virtual Fabricante Fabricante { get; set; }
     }
 }

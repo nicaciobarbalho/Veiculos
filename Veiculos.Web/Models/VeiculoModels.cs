@@ -28,4 +28,20 @@ namespace Veiculos.Web.Models
 
         public ModeloModel Modelo { get; set; }
     }
+
+    public class ModeloModel : BaseVeiculosModel
+    {
+        [Required(ErrorMessage = "Informe a descrição!")]
+        [Display(Name = "Descrição")]
+        public string Descricao { get; set; }
+
+        public FabricanteModel Fabricante { get; set; }
+    }
+
+    public class FabricanteModel : BaseVeiculosModel
+    {
+        [Required(ErrorMessage = "Informe a descrição!")]
+        [Display(Name = "Descrição")]
+        public string Descricao { get; set; }
+    }
 }
