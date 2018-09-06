@@ -44,4 +44,24 @@ namespace Veiculos.Web.Models
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
     }
+
+    public class CompraModel : BaseVeiculosModel
+    {
+        public VeiculoModel Veiculo { get; set; }
+
+        [Required(ErrorMessage = "Informe a data!")]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [Display(Name = "Data")]
+        public DateTime Data { get; set; }
+
+        [Required(ErrorMessage = "Informe a preço!")]
+        [RegularExpression(@"^\d+\.\d{0,2}$", ErrorMessage = "Preço inválido! Máximo dois pontos decimais.")]
+        [Range(1, 9999999999999999.99, ErrorMessage = "Preço inválido! Máximo de 18 dígitos.")]
+        [Display(Name = "Preço")]
+        public decimal Preco { get; set; }
+       
+        [Display(Name = "Observação")]
+        public string Obs { get; set; }
+    }
 }

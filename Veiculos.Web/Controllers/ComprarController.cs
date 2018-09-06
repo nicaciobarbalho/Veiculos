@@ -15,8 +15,16 @@ namespace Veiculos.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Models.VeiculoModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult RegistrarCompra(int idVeiculo, Models.CompraModel comprar)
         {
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
+
+            Ioc.Core.Data.Veiculo v = serviceVeiculo.Buscar(m => m.Id == idVeiculo);
+
+            //   Models.CompraModel comprar = TempData["Comprar"] as Models.CompraModel;
+            // Models.VeiculoModel veiculo = TempData["Veiculo"] as Models.VeiculoModel;
+
             return View();
         }
 
@@ -47,26 +55,37 @@ namespace Veiculos.Web.Controllers
                 ModelState.AddModelError(string.Empty, "Placa do veículo informada não encontrada!");
                 return View("Index");
             }
+           
 
-                return View("RegistroVenda", 
-                    new Models.VeiculoModel()
+            var v = new Models.VeiculoModel()
+            {
+                Id = veiculo.Id,
+                Ano = veiculo.AnoFabricacao,
+                Chassi = veiculo.Chassi,
+                Cilindradas = veiculo.Cilindradas,
+                Placa = veiculo.Placa,
+                Modelo = new Models.ModeloModel()
+                {
+                    Id = veiculo.Modelo.Id,
+                    Descricao = veiculo.Modelo.Descricao,
+                    Fabricante = new Models.FabricanteModel()
                     {
-                        Id = veiculo.Id,
-                        Ano = veiculo.AnoFabricacao,
-                        Chassi = veiculo.Chassi,
-                        Cilindradas = veiculo.Cilindradas,
-                        Placa = veiculo.Placa,
-                        Modelo = new Models.ModeloModel()
-                        {
-                            Id = veiculo.Modelo.Id,
-                            Descricao = veiculo.Modelo.Descricao,
-                            Fabricante = new Models.FabricanteModel()
-                            {
-                                Descricao = veiculo.Modelo.Fabricante.Descricao,
-                                Id = veiculo.Modelo.Id
-                            }
-                        }
-                    });
+                        Descricao = veiculo.Modelo.Fabricante.Descricao,
+                        Id = veiculo.Modelo.Id
+                    }
+                }
+            };
+
+              var   c = new Models.CompraModel()
+              {
+                  Veiculo = v
+              };
+
+            TempData["Veiculo"] = v;
+            TempData["Comprar"] = c;
+           
+            return View("RegistroVenda");
+                   
         }
 
 

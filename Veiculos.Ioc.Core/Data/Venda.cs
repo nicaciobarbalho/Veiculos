@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Veiculos.Ioc.Core.Data
@@ -14,6 +15,8 @@ namespace Veiculos.Ioc.Core.Data
         public string Obs { get; set; }
         public decimal ValorTotal { get; set; }
         public int IdUsuario { get; set; }
+        [ForeignKey("IdFormaPagamento")]
+        public virtual FormaPagamento FormaPagamento { get; set; }
     }
 
 }
