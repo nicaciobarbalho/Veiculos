@@ -14,7 +14,12 @@ namespace Veiculos.Ioc.Core.Data
         public string Comissao { get; set; }
         public string Obs { get; set; }
         public decimal ValorTotal { get; set; }
+
         public int IdUsuario { get; set; }
+        [ForeignKey("IdUsuario")]
+        public virtual Usuario Usuario { get; set; }
+
+        public int IdFormaPagamento { get; set; }
         [ForeignKey("IdFormaPagamento")]
         public virtual FormaPagamento FormaPagamento { get; set; }
     }

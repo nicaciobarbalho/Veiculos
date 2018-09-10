@@ -12,20 +12,48 @@ namespace Veiculos.Web.Controllers
         // GET: Venda/Comprar    
         public ActionResult Index()
         {
+           
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RegistrarCompra(int idVeiculo, Models.CompraModel comprar)
+        public ActionResult RegistrarCompra(int idVeiculo, string placaVeiculo, Models.CompraModel comprar)
         {
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
+            var Veiculo = Session["Veiculo"] as Models.VeiculoModel;
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.FormaPagamento> serviceFP = new Ioc.Service.Service<Ioc.Core.Data.FormaPagamento>();
 
-            Ioc.Core.Data.Veiculo v = serviceVeiculo.Buscar(m => m.Id == idVeiculo);
+            if (!ModelState.IsValid)
+            {
+                if (comprar.Id == -1) ModelState.AddModelError("", "Erro ao salvar!");
+                if (comprar.Preco <= 0) ModelState.AddModelError("", "Informe um preço!");
+                ViewBag.Veiculo = Veiculo;
+                ViewBag.Comprar = comprar;
 
-            //   Models.CompraModel comprar = TempData["Comprar"] as Models.CompraModel;
-            // Models.VeiculoModel veiculo = TempData["Veiculo"] as Models.VeiculoModel;
+                ViewBag.IdFormaPagamento = new SelectList
+                    (
+                        serviceFP.BuscarTodos(),
+                        "Id",
+                        "Descricao",
+                        1
+                    );
 
-            return View();
+                return View("RegistroCompra");
+            }
+
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> serviceCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
+
+            var c = serviceCompra.Inserir(new Ioc.Core.Data.Compra() { Data = comprar.Data, IdFormaPagamento = comprar.IdFormaPagamento, Preco = comprar.Preco, IdVeiculo = idVeiculo, Obs = comprar.Obs });
+
+
+            if (c.Id > 0)
+                return View("Index");
+            else
+            {
+                comprar.Id = -1;
+                return this.RegistrarCompra(idVeiculo, placaVeiculo, comprar);
+            }
+
         }
 
 
@@ -55,8 +83,8 @@ namespace Veiculos.Web.Controllers
                 ModelState.AddModelError(string.Empty, "Placa do veículo informada não encontrada!");
                 return View("Index");
             }
-           
 
+    
             var v = new Models.VeiculoModel()
             {
                 Id = veiculo.Id,
@@ -76,15 +104,22 @@ namespace Veiculos.Web.Controllers
                 }
             };
 
-              var   c = new Models.CompraModel()
-              {
-                  Veiculo = v
-              };
+            ViewBag.Veiculo = v;
+            ViewBag.Comprar = new Models.CompraModel();
 
-            TempData["Veiculo"] = v;
-            TempData["Comprar"] = c;
-           
-            return View("RegistroVenda");
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.FormaPagamento> serviceFP = new Ioc.Service.Service<Ioc.Core.Data.FormaPagamento>();
+
+            ViewBag.IdFormaPagamento = new SelectList
+                (
+                    serviceFP.BuscarTodos(),
+                    "Id",
+                    "Descricao",
+                    1
+                );
+
+            Session.Remove("Veiculo");
+            Session["Veiculo"] = v;
+            return View("RegistroCompra");
                    
         }
 
