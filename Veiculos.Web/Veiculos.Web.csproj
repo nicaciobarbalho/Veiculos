@@ -293,6 +293,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CadastrarController.cs" />
     <Compile Include="Controllers\ComprarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -418,6 +419,7 @@
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="Views\Comprar\Index.cshtml" />
     <Content Include="Views\Comprar\RegistroCompra.cshtml" />
+    <Content Include="Views\Cadastrar\Veiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

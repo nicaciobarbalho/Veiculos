@@ -26,7 +26,11 @@ namespace Veiculos.Web.Models
         [Display(Name = "Chassi")]
         public string Chassi { get; set; }
 
-        public ModeloModel Modelo { get; set; }
+        [Display(Name = "Foto")]
+        public byte[] Imagem { get; set; }
+
+        ModeloModel modelo = new ModeloModel();
+        public ModeloModel Modelo { get { return modelo; } set { modelo = value; } }
     }
 
     public class ModeloModel : BaseVeiculosModel
