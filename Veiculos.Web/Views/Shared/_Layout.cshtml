@@ -2,13 +2,14 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Meu aplicativo ASP.NET</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,22 +24,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-@{
-    
-    if (User.Identity.IsAuthenticated)
-    {
-        if (User.IsInRole("Gerente"))
-        {
+                    @{
+
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Gerente"))
+                            {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros<span class="caret"></span></a>
-                                    <ul  class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li class="dropdown-item" href="#">@Html.ActionLink("Fabricante", "Index", "Help", new { area = "HelpPage" }, null)</li>
                                         <li class="dropdown-item" href="#">@Html.ActionLink("Veículo", "Veiculo", "Cadastrar")</li>
                                         <li class="nav-divider"></li>
                                         <li class="dropdown-item" href="#">@Html.ActionLink("Usuário", "Index", "Help", new { area = "HelpPage" }, null)</li>
-                                      </ul>                         
+                                    </ul>
                                 </li>
-        }
+                            }
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transações<span class="caret"></span></a>
@@ -52,11 +53,11 @@
                                     <li class="dropdown-item" href="#">@Html.ActionLink("Venda", "Index", "Help", new { area = "HelpPage" }, null)</li>
                                 </ul>
                             </li>
-    }
-}
+                        }
+                    }
                 </ul>
-                     
-                
+
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -64,6 +65,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-10 col-md-offset-1">
+                <div class="container alert-container"></div>
+                @Html.Partial("_Alerts")
                 @RenderBody()
                 @RenderSection("SPAViews", required: false)
                 <hr />
@@ -72,10 +75,10 @@
                 </footer>
             </div>
         </div>
-     </div>
+    </div>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("Scripts", required: false)
+   
+    @Scripts.Render("~/bundles/bootstrap")    
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

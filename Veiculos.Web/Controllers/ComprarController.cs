@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Veiculos.Web.Extensions.Alerts;
 
 namespace Veiculos.Web.Controllers
 {
@@ -11,11 +12,10 @@ namespace Veiculos.Web.Controllers
     {
         // GET: Venda/Comprar    
         public ActionResult Index()
-        {
-           
-
-            return View();
+        {         
+          return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RegistrarCompra(int idVeiculo, string placaVeiculo, Models.CompraModel comprar)
@@ -47,21 +47,20 @@ namespace Veiculos.Web.Controllers
 
 
             if (c.Id > 0)
-                return View("Index");
+                return RedirectToAction("Index").WithSuccess("Compra salva com sucesso!");
             else
             {
                 comprar.Id = -1;
                 return this.RegistrarCompra(idVeiculo, placaVeiculo, comprar);
             }
-
         }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // public ActionResult PesquisarVeiculo(Veiculos.Web.Models.VeiculoModel veiculo)
         public ActionResult PesquisarVeiculo(string placa)
         {
+         
+            
+
             if (string.IsNullOrWhiteSpace(placa))
             {
                 ModelState.AddModelError(string.Empty, "Informe a placa do veículo!");
@@ -78,7 +77,7 @@ namespace Veiculos.Web.Controllers
             Ioc.Core.Data.Veiculo veiculo  = serviceVeiculo.Buscar(m => m.Placa == placa);
 
 
-            if (veiculo?.Id == 0)
+            if (veiculo == null || veiculo.Id == 0)
             {
                 ModelState.AddModelError(string.Empty, "Placa do veículo informada não encontrada!");
                 return View("Index");
@@ -119,8 +118,7 @@ namespace Veiculos.Web.Controllers
 
             Session.Remove("Veiculo");
             Session["Veiculo"] = v;
-            return View("RegistroCompra");
-                   
+            return View("RegistroCompra");               
         }
 
 

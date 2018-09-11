@@ -1,0 +1,23 @@
+﻿@using Veiculos.Web.Extensions.Alerts
+
+@{
+    if (TempData.GetAlerts().Any())
+    {
+        foreach (var alert in TempData.GetAlerts())
+        {
+        <div class="alert @alert.AlertClass">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            @alert.Message
+        </div>
+        }
+    }
+}
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('.alert').fadeTo("slow", 0.1, function () {
+                $('.alert').alert('close')
+            })
+        }, 3000);
+    });
+</script>
