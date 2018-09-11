@@ -91,16 +91,10 @@ namespace Veiculos.Web.Controllers
                 Chassi = veiculo.Chassi,
                 Cilindradas = veiculo.Cilindradas,
                 Placa = veiculo.Placa,
-                Modelo = new Models.ModeloModel()
-                {
-                    Id = veiculo.Modelo.Id,
-                    Descricao = veiculo.Modelo.Descricao,
-                    Fabricante = new Models.FabricanteModel()
-                    {
-                        Descricao = veiculo.Modelo.Fabricante.Descricao,
-                        Id = veiculo.Modelo.Id
-                    }
-                }
+                IdModelo = veiculo.Modelo.Id,
+                DescricaoModelo = veiculo.Modelo.Descricao,
+                IdFabricante = veiculo.Modelo.Fabricante.Id,
+                DescricaoFabricante = veiculo.Modelo.Fabricante.Descricao
             };
 
             ViewBag.Veiculo = v;

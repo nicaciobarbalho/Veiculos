@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Veiculos.Web.Extensions.Alerts;
 
 namespace Veiculos.Web.Controllers
 {
@@ -18,7 +19,7 @@ namespace Veiculos.Web.Controllers
         {
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Modelo> service = new Ioc.Service.Service<Ioc.Core.Data.Modelo>();
 
-            ViewBag.IdModelo = new SelectList
+            ViewBag.IdModelo =  new SelectList
                 (
                     service.BuscarTodos(),
                     "Id",
@@ -30,7 +31,7 @@ namespace Veiculos.Web.Controllers
         {
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Fabricante> service = new Ioc.Service.Service<Ioc.Core.Data.Fabricante>();
 
-            ViewBag.IdFabricante = new SelectList
+            ViewBag.IdFabricante =  new SelectList
                 (
                     service.BuscarTodos(),
                     "Id",
@@ -46,9 +47,27 @@ namespace Veiculos.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Veiculo(string placa)
+        public ActionResult Veiculo(Veiculos.Web.Models.VeiculoModel veiculo)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {                
+                this.CarregaComboModelo();
+                this.CarregaComboFabricante();
+                return View("Veiculo", veiculo);
+            }
+
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
+
+            serviceVeiculo.Inserir(new Ioc.Core.Data.Veiculo()
+            {
+                AnoFabricacao = veiculo.Ano,
+                Chassi = veiculo.Chassi,
+                Cilindradas = veiculo.Cilindradas,
+                IdModelo = veiculo.IdModelo,
+                IdStatusVeiculo = 1,
+                Placa = veiculo.Placa
+            });
+            return RedirectToAction("Veiculo").WithSuccess("Compra salva com sucesso!");
         }
     }
 }

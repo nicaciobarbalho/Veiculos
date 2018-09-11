@@ -47,10 +47,10 @@
                             <div class="col-sm-9">@Html.Label(veiculo.Placa, new { @class = "right" })</div>
 
                             <div class="col-sm-3">@Html.Label("Fabricante", null, new { @class = "left" })</div>
-                            <div class="col-sm-9">@Html.Label(veiculo.Modelo.Fabricante.Descricao, new { @class = "right" })</div>
+                            <div class="col-sm-9">@Html.Label(veiculo.DescricaoFabricante, new { @class = "right" })</div>
 
                             <div class="col-sm-3">@Html.Label("Modelo", null, new { @class = "left" })</div>
-                            <div class="col-sm-9 left">@Html.Label(veiculo.Modelo.Descricao, new { @class = "right" })</div>
+                            <div class="col-sm-9 left">@Html.Label(veiculo.DescricaoModelo, new { @class = "right" })</div>
 
                             <div class="col-sm-3">@Html.LabelFor(m => veiculo.Ano, null, new { @class = "left" })</div>
                             <div class="col-sm-9 left">@Html.Label(veiculo.Ano.ToString(), new { @class = "right" })</div>
@@ -66,7 +66,7 @@
                  </div>   
             
                 
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="margin-top:3% !important;">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Dados da compra
@@ -75,8 +75,7 @@
 
                     <div class="panel-body">
                         <div class="row center-block">
-                            @using (Html.BeginForm("RegistrarCompra", "Comprar", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "submitForm", vx = Model }))
- 
+                            @using (Html.BeginForm("RegistrarCompra", "Comprar", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "submitForm" })) 
                                 {
 
                                 @Html.AntiForgeryToken()
