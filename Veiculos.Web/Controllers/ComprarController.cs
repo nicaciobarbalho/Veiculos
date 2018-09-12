@@ -56,33 +56,32 @@ namespace Veiculos.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PesquisarVeiculo(string placa)
-        {
-         
-            
-
+        public ActionResult PesquisarVeiculo(string placa, string controlador = null)
+        {                     
             if (string.IsNullOrWhiteSpace(placa))
             {
                 ModelState.AddModelError(string.Empty, "Informe a placa do veículo!");
-                return View("Index");
+                return  controlador == null ? View("Index") : View($"{controlador}/Index");
             }
             else if (!Veiculos.Util.Validacao.EPlacaValidar(placa))
             {
                 ModelState.AddModelError(string.Empty, "Placa do veículo informada está em formato incorreto!");
-                return View("Index");
+                return controlador == null ? View("Index") : View($"{controlador}/Index");
             }
 
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
 
             Ioc.Core.Data.Veiculo veiculo  = serviceVeiculo.Buscar(m => m.Placa == placa);
 
-
             if (veiculo == null || veiculo.Id == 0)
             {
-                ModelState.AddModelError(string.Empty, "Placa do veículo informada não encontrada!");
-                return View("Index");
-            }
+                var cadastrarController = DependencyResolver.Current.GetService<CadastrarController>();
+                cadastrarController.ControllerContext = new ControllerContext(this.Request.RequestContext, cadastrarController);
 
+                var result = cadastrarController.BuscarVeiculoPorPlaca(placa, "Comprar");
+
+                return result;
+            }
     
             var v = new Models.VeiculoModel()
             {
@@ -112,10 +111,8 @@ namespace Veiculos.Web.Controllers
 
             Session.Remove("Veiculo");
             Session["Veiculo"] = v;
-            return View("RegistroCompra");               
+            return controlador == null ? View("RegistroCompra") : View($"{controlador}/RegistroCompra");               
         }
-
-
 
         // GET: Venda/Comprar/Details/5
         public ActionResult Details(int id)

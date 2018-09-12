@@ -30,7 +30,7 @@ namespace Veiculos.Web.Models
         public string Chassi { get; set; }
 
         [Display(Name = "Foto")]
-        public string Imagem { get; set; }
+        public HttpPostedFileBase Imagem { get; set; }
         
         public int IdModelo { get; set; }
         public string DescricaoModelo { get; set; }

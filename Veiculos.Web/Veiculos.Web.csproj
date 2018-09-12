@@ -427,7 +427,7 @@
     <Content Include="Views\Shared\_Alerts.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Veiculos\" />
     <Folder Include="Areas\Cadastros\Controllers\" />
     <Folder Include="Areas\Cadastros\Models\" />
     <Folder Include="Areas\Cadastros\Views\Shared\" />

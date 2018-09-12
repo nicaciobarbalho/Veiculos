@@ -11,48 +11,48 @@ namespace Veiculos.Ioc.Service
 {
     public class Service<T> : IService<T> where T : class, new()
     {
-        private IRepository<T> usuarioRepository;
+        private IRepository<T> repositorioGenerico;
 
         public Service(IRepository<T> usuarioRepository)
         {
-            this.usuarioRepository = usuarioRepository;
+            this.repositorioGenerico = usuarioRepository;
         }
 
         public Service()
         {
             Repository<T> repository = new Repository<T>();
             
-            this.usuarioRepository = repository;
+            this.repositorioGenerico = repository;
         }
 
         public int Apagar(T usuario)
         {
-            return this.usuarioRepository.Delete(usuario);
+            return this.repositorioGenerico.Delete(usuario);
         }
 
         public int Atualizar(T usuario)
         {
-            return this.usuarioRepository.Edit(usuario);
+            return this.repositorioGenerico.Edit(usuario);
         }
 
         public T Inserir(T usuario)
         {
-            return this.usuarioRepository.Insert(usuario);
+            return this.repositorioGenerico.Insert(usuario);
         }
 
         public IQueryable<T> BuscarTodos()
         {
-            return this.usuarioRepository.FindAll();
+            return this.repositorioGenerico.FindAll();
         }
 
         public T Buscar(int id)
         {
-            return this.usuarioRepository.FindById(id);
+            return this.repositorioGenerico.FindById(id);
         }
 
         public T Buscar(System.Linq.Expressions.Expression<Func<T, bool>> where = null)
         {
-            return this.usuarioRepository.FindOne(where);
+            return this.repositorioGenerico.FindOne(where);
         }
 
     }

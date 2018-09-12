@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -47,7 +48,7 @@ namespace Veiculos.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Veiculo(Veiculos.Web.Models.VeiculoModel veiculo)
+        public ActionResult Veiculo(Veiculos.Web.Models.VeiculoModel veiculo, string origemFormulario)
         {
             if (!ModelState.IsValid)
             {                
@@ -58,6 +59,14 @@ namespace Veiculos.Web.Controllers
 
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
 
+            if (serviceVeiculo.Buscar(v => v.Placa == veiculo.Placa && v.IdStatusVeiculo != 3) != null)
+            {
+                this.CarregaComboModelo();
+                this.CarregaComboFabricante();
+                
+                return View("Veiculo", veiculo).WithInfo("O veículo está cadastrado no sistema e já pertence à loja!");
+            }
+
             serviceVeiculo.Inserir(new Ioc.Core.Data.Veiculo()
             {
                 AnoFabricacao = veiculo.Ano,
@@ -65,9 +74,58 @@ namespace Veiculos.Web.Controllers
                 Cilindradas = veiculo.Cilindradas,
                 IdModelo = veiculo.IdModelo,
                 IdStatusVeiculo = 1,
-                Placa = veiculo.Placa
+                Placa = veiculo.Placa,
+                Foto = ImagemParaByte(veiculo.Imagem)
             });
-            return RedirectToAction("Veiculo").WithSuccess("Compra salva com sucesso!");
+
+            if (!string.IsNullOrEmpty(origemFormulario))
+            {
+                var controller = DependencyResolver.Current.GetService<ComprarController>();
+                controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+
+                var result = controller.PesquisarVeiculo(veiculo.Placa, "../Comprar");
+
+                return result;
+            }
+            else
+            {
+               return RedirectToAction("Veiculo").WithSuccess("Compra salva com sucesso!");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BuscarVeiculoPorPlaca(string placa, string origem = null)
+        {
+            this.CarregaComboModelo();
+            this.CarregaComboFabricante();
+
+            ViewBag.OrigemFormulario = origem;
+            Models.VeiculoModel veiculo = new Models.VeiculoModel();
+            veiculo.Placa = placa;
+            return View("../Cadastrar/Veiculo", veiculo);
+        }
+
+        private string SaveToPhysicalLocation(HttpPostedFileBase file)
+        {
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/Veiculos"), fileName);
+                file.SaveAs(path);
+                return path;
+            }
+            return string.Empty;
+        }
+
+        private byte[] ImagemParaByte(HttpPostedFileBase imagem)
+        {
+            if (imagem != null)
+            {
+                BinaryReader b = new BinaryReader(imagem.InputStream);
+                byte[] binData = b.ReadBytes(imagem.ContentLength);
+                return binData;
+            }
+            return null;         
         }
     }
 }
