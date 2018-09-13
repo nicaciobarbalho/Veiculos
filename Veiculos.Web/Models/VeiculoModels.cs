@@ -9,8 +9,7 @@ using System.Web.Mvc;
 namespace Veiculos.Web.Models
 {
     public class VeiculoModel : BaseVeiculosModel
-    {
-      
+    {      
         [Required(ErrorMessage = "Informe a placa do veículo!")]
         [RegularExpression(@"^([a-zA-Z]{3}-[0-9]{4})$", ErrorMessage = "Placa do veículo informada está em formato incorreto!")]
         [Display(Name = "Placa")]

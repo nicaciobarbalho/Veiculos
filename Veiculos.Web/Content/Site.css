@@ -20,6 +20,17 @@
     margin-top:10%;
 }
 
+.btn-glyphicon {
+    padding: 2px;
+    background: #ffffff;
+    margin-right: 4px;
+}
+
+.icon-btn {
+    padding: 1px 15px 3px 2px;
+    border-radius: 30px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

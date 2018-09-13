@@ -299,6 +299,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\VenderController.cs" />
     <Compile Include="Extensions\Alerts\Alert.cs" />
     <Compile Include="Extensions\Alerts\AlertDecoratorResult.cs" />
     <Compile Include="Extensions\Alerts\AlertExtensions.cs" />
@@ -311,6 +312,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
     <Compile Include="Models\VeiculoModels.cs" />
+    <Compile Include="Models\VendaModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -425,6 +427,8 @@
     <Content Include="Views\Comprar\RegistroCompra.cshtml" />
     <Content Include="Views\Cadastrar\Veiculo.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
+    <Content Include="Views\Vender\_FormaPagamento.cshtml" />
+    <Content Include="Views\Vender\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Veiculos\" />
