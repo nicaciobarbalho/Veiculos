@@ -1,0 +1,33 @@
+﻿@using Veiculos.Web.Models
+@model VeiculoModel
+
+<section id="IdViewVeiculo">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Dados do veículo
+            </h3>
+        </div>
+            <div class="panel-body">
+                <div class="row center-block">
+                    <div class="col-sm-3">@Html.LabelFor(model => model.Placa, new { @class = "left" })</div>
+                    <div class="col-sm-9">@Html.Label(Model.Placa, new { @class = "right" })</div>
+
+                    <div class="col-sm-3">@Html.Label("Fabricante", null, new { @class = "left" })</div>
+                    <div class="col-sm-9">@Html.Label(Model.DescricaoFabricante, new { @class = "right" })</div>
+
+                    <div class="col-sm-3">@Html.Label("Modelo", null, new { @class = "left" })</div>
+                    <div class="col-sm-9 left">@Html.Label(Model.DescricaoFabricante, new { @class = "right" })</div>
+
+                    <div class="col-sm-3">@Html.LabelFor(model => model.Ano, null, new { @class = "left" })</div>
+                    <div class="col-sm-9 left">@Html.Label(Model.Ano.ToString(), new { @class = "right" })</div>
+
+                    <div class="col-sm-3">@Html.LabelFor(model => model.Cilindradas, new { @class = "left" })</div>
+                    <div class="col-sm-9 left">@Html.Label(Model.Cilindradas.ToString(), new { @class = "right" })</div>
+
+                    <div class="col-sm-3">@Html.LabelFor(model => model.Chassi, null, new { @class = "left" })</div>
+                    <div class="col-sm-9 left">@Html.Label(Model.Chassi, new { @class = "right" })</div>
+                </div>
+            </div>
+    </div>  
+</section>

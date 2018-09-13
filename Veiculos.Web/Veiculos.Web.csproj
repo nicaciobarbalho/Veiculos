@@ -299,6 +299,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\VeiculoController.cs" />
     <Compile Include="Controllers\VenderController.cs" />
     <Compile Include="Extensions\Alerts\Alert.cs" />
     <Compile Include="Extensions\Alerts\AlertDecoratorResult.cs" />
@@ -308,9 +309,12 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseVeiculosModels.cs" />
+    <Compile Include="Models\CompraModels.cs" />
+    <Compile Include="Models\FabricanteModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
+    <Compile Include="Models\PagamentoModels.cs" />
     <Compile Include="Models\VeiculoModels.cs" />
     <Compile Include="Models\VendaModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -424,11 +428,11 @@
     </Content>
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="Views\Comprar\Index.cshtml" />
-    <Content Include="Views\Comprar\RegistroCompra.cshtml" />
     <Content Include="Views\Cadastrar\Veiculo.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
-    <Content Include="Views\Vender\_FormaPagamento.cshtml" />
     <Content Include="Views\Vender\Index.cshtml" />
+    <Content Include="Views\Veiculo\Placa.cshtml" />
+    <Content Include="Views\Veiculo\Veiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Veiculos\" />

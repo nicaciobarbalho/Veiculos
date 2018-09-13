@@ -59,12 +59,12 @@ namespace Veiculos.Web.Controllers
 
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
 
-            if (serviceVeiculo.Buscar(v => v.Placa == veiculo.Placa && v.IdStatusVeiculo != 3) != null)
+            if (serviceVeiculo.Buscar(v => v.Placa == veiculo.Placa) != null)
             {
                 this.CarregaComboModelo();
                 this.CarregaComboFabricante();
                 
-                return View("Veiculo", veiculo).WithInfo("O veículo está cadastrado no sistema e já pertence à loja!");
+                return View("Veiculo", veiculo).WithInfo("O veículo está cadastrado no sistema!");
             }
 
             serviceVeiculo.Inserir(new Ioc.Core.Data.Veiculo()

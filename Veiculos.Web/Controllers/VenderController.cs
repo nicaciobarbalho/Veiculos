@@ -20,13 +20,27 @@ namespace Veiculos.Web.Controllers
                        1
                    );
         }
+
         // GET: Vender
         public ActionResult Index()
         {
-            this.FormaPagamento();
+           this.FormaPagamento();
 
-            Models.VendaModel v = new Models.VendaModel();
-            return View(v);
+            Models.VendaModel venda = new Models.VendaModel();
+
+            Models.VeiculoModel veiculo = (Models.VeiculoModel)Session["Veiculo"];
+            venda.Veiculo = veiculo;
+
+            return View(venda);
+        }
+
+        // GET: Vender
+        public ActionResult Home()
+        {
+            ViewBag.Controlador = "Vender";
+            ViewBag.Acao = "Index";
+
+            return View("../Veiculo/Placa");
         }
     }
 }

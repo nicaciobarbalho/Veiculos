@@ -1,42 +1,105 @@
-﻿@{
+﻿@using Veiculos.Web.Models
+@model CompraModel
+
+@{
     ViewBag.Title = "Comprar";
 }
+
+<style>
+    .well {
+        background-color: white;
+        margin-bottom:3px;                
+        padding:3px;
+    }
+    label{
+        
+    }
+    
+    .right {  
+         font-weight: normal !important;  
+    }
+
+    .left {
+         font-weight: bold !important;  
+        text-transform: uppercase; 
+    }
+</style>
+
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-lg-offset-1">
-            <section id="IdBuscarVeículo">
-                <div class="panel panel-default">
+            <section id="IdViewCompra">
+
+                @Html.Partial("../Veiculo/Veiculo", Model.Veiculo)   
+                            
+                <div class="panel panel-default" style="margin-top:3% !important;">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Buscar Veículo
+                            Dados da compra
                         </h3>
                     </div>
 
                     <div class="panel-body">
                         <div class="row center-block">
-                            @using (Html.BeginForm("PesquisarVeiculo", "Comprar", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                            {
+                            @using (Html.BeginForm("RegistrarCompra", "Comprar", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "submitForm" })) 
+                                {
+
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.Label("Placa", null, new { @class = "col-md-2 control-label" })
-                                    <div class="col-xs-10">
-                                        @Html.ValidationMessage("placa", null, new { @class = "text-danger" })
 
-                                        @Html.TextBox("placa", null, new { @class = "form-control", @name = "placa" })
+                                @Html.Hidden("idVeiculo", Model.Veiculo.Id)
+                                @Html.Hidden("placaVeiculo", Model.Veiculo.Placa)
+                           
+                                <div class="form-group">
+                                    <div class="col-sm-3 control-label" style="text-align:left;">
+                                        @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "left" })
+                                    </div>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger", })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-3 control-label" style="text-align:left;">
+                                        @Html.Label("", "Preço", htmlAttributes: new { @class = "left" })
+                                    </div>
+                                    <div class="col-sm-9">                                        
+                                        @Html.EditorFor(model => model.Preco, new { htmlAttributes = new { @class = "form-control required numeric", @style = "text-align:right;" } })
+                                        @Html.ValidationMessageFor(model => model.Preco, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-3 control-label" style="text-align:left;">
+                                        @Html.Label("", "Forma de pagamento", htmlAttributes: new { @class = "left" })
+                                    </div>
+                                    <div class="col-sm-9">                                                                                  
+                                        @Html.DropDownListFor(model => model.IdFormaPagamento, ViewBag.IdFormaPagamento as SelectList, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.IdFormaPagamento, "", new { @class = "text-danger" })
+                                     </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-3 control-label" style="text-align:left;">
+                                        @Html.Label("", "Observação", htmlAttributes: new { @class = "left" })
+                                    </div>
+                                    <div class="col-sm-9">
+                                        @Html.TextAreaFor(model => model.Obs, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Obs, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-xs-10">
-                                        <input type="submit" value="Pesquisar" class="btn btn-default" />
+                                        <input type="submit" value="Salvar" class="btn btn-default" />
                                     </div>
                                 </div>
                             }
                         </div>
                     </div>
-                </div>
+                </div>         
             </section>
         </div>
     </div>

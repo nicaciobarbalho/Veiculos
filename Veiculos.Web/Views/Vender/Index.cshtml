@@ -5,18 +5,30 @@
     ViewBag.Title = "Vender";
 }
 
+<style>
+    .right {
+        font-weight: normal !important;
+    }
+
+    .left {
+        font-weight: bold !important;
+        text-transform: uppercase;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-lg-offset-1">
             <section id="IdVender">
                 
+                @Html.Partial("../Veiculo/Veiculo", Model.Veiculo)
+
                 <div class="panel panel-default" style="margin-top:3% !important;">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Vender
                         </h3>
                     </div>
-
                     <div class="panel-body">
                         <div class="row center-block">
                             @using (Html.BeginForm("RegistrarVenda", "Vender", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "submitForm" }))
@@ -141,7 +153,7 @@
         function addRow() {
 
             @{
-                Model.Pagamentos.Add(new PagamentoModel());
+                Model?.Pagamentos.Add(new PagamentoModel());
             }
 
             var index = $("#tbBooks").children("tr").length + 1;

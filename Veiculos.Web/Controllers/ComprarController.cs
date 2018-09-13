@@ -10,48 +10,67 @@ namespace Veiculos.Web.Controllers
     [Authorize]
     public class ComprarController : Controller
     {
+        private void FormaPagamento()
+        {
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.FormaPagamento> service = new Ioc.Service.Service<Ioc.Core.Data.FormaPagamento>();
+
+            ViewBag.IdFormaPagamento = new SelectList
+                   (
+                       service.BuscarTodos(),
+                       "Id",
+                       "Descricao",
+                       1
+                   );
+        }
+
         // GET: Venda/Comprar    
         public ActionResult Index()
-        {         
-          return View();
+        {
+            this.FormaPagamento();
+
+            Models.CompraModel comprar = new Models.CompraModel();
+
+            Models.VeiculoModel veiculo = (Models.VeiculoModel)Session["Veiculo"];
+            comprar.Veiculo = veiculo;
+
+            return View(comprar);
+        }
+
+        // GET: Vender
+        public ActionResult Home()
+        {
+            ViewBag.Controlador = "Comprar";
+            ViewBag.Acao = "Index";
+
+            return View("../Veiculo/Placa");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RegistrarCompra(int idVeiculo, string placaVeiculo, Models.CompraModel comprar)
+        public ActionResult RegistrarCompra(int idVeiculo, string placaVeiculo, Models.CompraModel model)
         {
             var Veiculo = Session["Veiculo"] as Models.VeiculoModel;
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.FormaPagamento> serviceFP = new Ioc.Service.Service<Ioc.Core.Data.FormaPagamento>();
-
+    
             if (!ModelState.IsValid)
             {
-                if (comprar.Id == -1) ModelState.AddModelError("", "Erro ao salvar!");
-                if (comprar.Preco <= 0) ModelState.AddModelError("", "Informe um preço!");
-                ViewBag.Veiculo = Veiculo;
-                ViewBag.Comprar = comprar;
+                if (model.Id == -1) ModelState.AddModelError("", "Erro ao salvar!");
+                if (model.Preco <= 0) ModelState.AddModelError("", "Informe um preço!");
 
-                ViewBag.IdFormaPagamento = new SelectList
-                    (
-                        serviceFP.BuscarTodos(),
-                        "Id",
-                        "Descricao",
-                        1
-                    );
+                this.FormaPagamento();
 
-                return View("RegistroCompra");
+                return View(model);
             }
 
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> serviceCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> service = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
 
-            var c = serviceCompra.Inserir(new Ioc.Core.Data.Compra() { Data = comprar.Data, IdFormaPagamento = comprar.IdFormaPagamento, Preco = comprar.Preco, IdVeiculo = idVeiculo, Obs = comprar.Obs });
-
+            var c = service.Inserir(new Ioc.Core.Data.Compra() { Data = model.Data, IdFormaPagamento = model.IdFormaPagamento, Preco = model.Preco, IdVeiculo = idVeiculo, Obs = model.Obs });
 
             if (c.Id > 0)
-                return RedirectToAction("Index").WithSuccess("Compra salva com sucesso!");
+                return RedirectToAction("Home").WithSuccess("Compra salva com sucesso!");
             else
             {
-                comprar.Id = -1;
-                return this.RegistrarCompra(idVeiculo, placaVeiculo, comprar);
+                model.Id = -1;
+                return this.RegistrarCompra(idVeiculo, placaVeiculo, model);
             }
         }
         [HttpPost]
@@ -96,22 +115,15 @@ namespace Veiculos.Web.Controllers
                 DescricaoFabricante = veiculo.Modelo.Fabricante.Descricao
             };
 
-            ViewBag.Veiculo = v;
-            ViewBag.Comprar = new Models.CompraModel();
+          
+            Models.CompraModel compra = new Models.CompraModel();
+            compra.Veiculo = v;
 
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.FormaPagamento> serviceFP = new Ioc.Service.Service<Ioc.Core.Data.FormaPagamento>();
-
-            ViewBag.IdFormaPagamento = new SelectList
-                (
-                    serviceFP.BuscarTodos(),
-                    "Id",
-                    "Descricao",
-                    1
-                );
+            this.FormaPagamento();
 
             Session.Remove("Veiculo");
             Session["Veiculo"] = v;
-            return controlador == null ? View("RegistroCompra") : View($"{controlador}/RegistroCompra");               
+            return controlador == null ? View() : View($"{controlador}/Index", compra);               
         }
 
         // GET: Venda/Comprar/Details/5
