@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Veiculos.Web.Extensions;
 using Veiculos.Web.Extensions.Alerts;
 
 namespace Veiculos.Web.Controllers
@@ -66,7 +67,10 @@ namespace Veiculos.Web.Controllers
             var c = service.Inserir(new Ioc.Core.Data.Compra() { Data = model.Data, IdFormaPagamento = model.IdFormaPagamento, Preco = model.Preco, IdVeiculo = idVeiculo, Obs = model.Obs });
 
             if (c.Id > 0)
+            {
+                StatusVeiculo.StatusAtualizar(new Ioc.Core.Data.Veiculo() { Id = c.IdVeiculo }, StatusVeiculo.Status.DisponivelParaVenda);
                 return RedirectToAction("Home").WithSuccess("Compra salva com sucesso!");
+            }
             else
             {
                 model.Id = -1;

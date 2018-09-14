@@ -8,6 +8,7 @@ using Veiculos.Web.Extensions.Alerts;
 
 namespace Veiculos.Web.Controllers
 {
+    [Authorize]
     public class CadastrarController : Controller
     {
         // GET: Cadastrar
@@ -73,7 +74,7 @@ namespace Veiculos.Web.Controllers
                 Chassi = veiculo.Chassi,
                 Cilindradas = veiculo.Cilindradas,
                 IdModelo = veiculo.IdModelo,
-                IdStatusVeiculo = 1,
+                IdStatusVeiculo = 3,
                 Placa = veiculo.Placa,
                 Foto = ImagemParaByte(veiculo.Imagem)
             });

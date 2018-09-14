@@ -299,11 +299,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\StatusVeiculo.cs" />
     <Compile Include="Controllers\VeiculoController.cs" />
     <Compile Include="Controllers\VenderController.cs" />
     <Compile Include="Extensions\Alerts\Alert.cs" />
     <Compile Include="Extensions\Alerts\AlertDecoratorResult.cs" />
     <Compile Include="Extensions\Alerts\AlertExtensions.cs" />
+    <Compile Include="Extensions\Models.cs" />
+    <Compile Include="Extensions\Tools.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -389,6 +392,7 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
+    <Content Include="Status do veículo.txt" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
