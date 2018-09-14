@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Veiculos.Web.Extensions;
 using Veiculos.Web.Extensions.Alerts;
 
 namespace Veiculos.Web.Controllers
@@ -55,8 +56,18 @@ namespace Veiculos.Web.Controllers
             {
                 return View("Placa").WithInfo("Operação não é permitida, pois o veículo já pertence à loja!");
             }
+            //Registrar venda: Fluxo Alternativo (2): veículo não está cadastrado no sistema ou seu status é NÃO PERTENCE À LOJA.
+            else if (veiculo != null && veiculo.Id > 0 && controlador.Equals("Vender") && veiculo.IdStatusVeiculo == 3)
+            {
+                return View("Placa").WithInfo("Operação não é permitida, pois o veículo não pertence à loja!");
+            }
+            //Registrar venda: Fluxo Alternativo (2): veículo está com status EM PROCESSO DE VENDA.
+            else if (veiculo != null && veiculo.Id > 0 && controlador.Equals("Vender") && veiculo.IdStatusVeiculo == 2)
+            {
+                return View("Placa").WithInfo("Veículo está sendo negociado em outra transação!");
+            }
 
-                var v = new Models.VeiculoModel()
+            var v = new Models.VeiculoModel()
             {
                 Id = veiculo.Id,
                 Ano = veiculo.AnoFabricacao,
@@ -66,8 +77,11 @@ namespace Veiculos.Web.Controllers
                 IdModelo = veiculo.Modelo.Id,
                 DescricaoModelo = veiculo.Modelo.Descricao,
                 IdFabricante = veiculo.Modelo.Fabricante.Id,
-                DescricaoFabricante = veiculo.Modelo.Fabricante.Descricao
-            };
+                DescricaoFabricante = veiculo.Modelo.Fabricante.Descricao,
+               Imagem = (HttpPostedFileBase)new MemoryPostedFile(veiculo.Foto)
+        };
+
+  
 
             Session.Remove("Veiculo");
             Session["Veiculo"] = v;

@@ -36,7 +36,7 @@
 
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+                                @Html.HiddenFor(model => model.Veiculo.Id)
 
                                 <div class="form-group">
                                     <div class="col-sm-3 control-label" style="text-align:left;">
@@ -84,7 +84,7 @@
                                     <div class="panel panel-default" style="margin-top:3% !important;">
                                         <div class="panel-heading">
                                             <h3 class="panel-title">
-                                                Forma de Pagamento
+                                                Pagamento
                                             </h3>
                                         </div>
 
@@ -101,11 +101,18 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 control-label" style="text-align:left;">
-                                                        @Html.Label("", "Valor", htmlAttributes: new { @class = "left" })
+                                                   
+                                                    <div id="IdVendaNormal" style="display:normal">
+                                                        <div class="col-sm-3 control-label" style="text-align:left;">
+                                                            @Html.Label("", "Valor", htmlAttributes: new { @class = "left" })
+                                                        </div>
+                                                        <div class="col-sm-9">
+                                                            @Html.Editor("IdValor", new { htmlAttributes = new { @class = "form-control required numeric", @style = "text-align:right;" } })
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-9">
-                                                        @Html.Editor("IdValor", new { htmlAttributes = new { @class = "form-control required numeric", @style = "text-align:right;" } })
+
+                                                    <div id="IdVendaVeiculo" style="display:none">
+                                                            Veículo
                                                     </div>
 
                                                     <div class="col-sm-3 col-sm-offset-3 control-label" style="text-align:left;">
@@ -137,7 +144,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-9">
-                                        <input type="submit" value="Salvar" class="btn btn-default" />
+                                        <input type="submit" value="Finalizar venda" class="btn btn-default" />
                                     </div>
                                 </div>
                             }
@@ -150,6 +157,27 @@
 </div>
 
 <script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#IdFormaPagamento").change(function () {
+            
+            var idFormaPagamento = $("#IdFormaPagamento option:selected").val();
+        
+            if (idFormaPagamento == 4) {
+                $("#IdVendaNormal").attr("style", "display:none");
+                $("#IdVendaVeiculo").attr("style", "display:normal");
+            }
+            else {
+                $("#IdVendaNormal").attr("style", "display:normal");
+                $("#IdVendaVeiculo").attr("style", "display:none");
+            }
+        });
+
+    });
+
+   
+
         function addRow() {
 
             @{

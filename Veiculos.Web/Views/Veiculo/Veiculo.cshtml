@@ -1,6 +1,34 @@
-﻿@using Veiculos.Web.Models
+﻿@using Veiculos.Web.Models;
+@using Veiculos.Web.Extensions;
 @model VeiculoModel
+<style>
+    /* CSS used here will be applied after bootstrap.css */
+.thumbnail_container {
+     position: relative;
+     width: 100%;
+     padding-bottom: 100%;
+  margin-bottom:20px;
+}
 
+.thumbnail {
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+.thumbnail img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+img{
+    max-height:100%;
+    max-width:100%;
+}
+</style>
 <section id="IdViewVeiculo">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -10,24 +38,37 @@
         </div>
             <div class="panel-body">
                 <div class="row center-block">
-                    <div class="col-sm-3">@Html.LabelFor(model => model.Placa, new { @class = "left" })</div>
-                    <div class="col-sm-9">@Html.Label(Model.Placa, new { @class = "right" })</div>
 
-                    <div class="col-sm-3">@Html.Label("Fabricante", null, new { @class = "left" })</div>
-                    <div class="col-sm-9">@Html.Label(Model.DescricaoFabricante, new { @class = "right" })</div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-3">@Html.LabelFor(model => model.Placa, new { @class = "left" })</div>
+                        <div class="col-sm-9">@Html.Label(Model.Placa, new { @class = "right" })</div>
 
-                    <div class="col-sm-3">@Html.Label("Modelo", null, new { @class = "left" })</div>
-                    <div class="col-sm-9 left">@Html.Label(Model.DescricaoFabricante, new { @class = "right" })</div>
+                        <div class="col-sm-3">@Html.Label("Fabricante", null, new { @class = "left" })</div>
+                        <div class="col-sm-9">@Html.Label(Model.DescricaoFabricante, new { @class = "right" })</div>
 
-                    <div class="col-sm-3">@Html.LabelFor(model => model.Ano, null, new { @class = "left" })</div>
-                    <div class="col-sm-9 left">@Html.Label(Model.Ano.ToString(), new { @class = "right" })</div>
+                        <div class="col-sm-3">@Html.Label("Modelo", null, new { @class = "left" })</div>
+                        <div class="col-sm-9 left">@Html.Label(Model.DescricaoFabricante, new { @class = "right" })</div>
 
-                    <div class="col-sm-3">@Html.LabelFor(model => model.Cilindradas, new { @class = "left" })</div>
-                    <div class="col-sm-9 left">@Html.Label(Model.Cilindradas.ToString(), new { @class = "right" })</div>
+                        <div class="col-sm-3">@Html.LabelFor(model => model.Ano, null, new { @class = "left" })</div>
+                        <div class="col-sm-9 left">@Html.Label(Model.Ano.ToString(), new { @class = "right" })</div>
 
-                    <div class="col-sm-3">@Html.LabelFor(model => model.Chassi, null, new { @class = "left" })</div>
-                    <div class="col-sm-9 left">@Html.Label(Model.Chassi, new { @class = "right" })</div>
+                        <div class="col-sm-3">@Html.LabelFor(model => model.Cilindradas, new { @class = "left" })</div>
+                        <div class="col-sm-9 left">@Html.Label(Model.Cilindradas.ToString(), new { @class = "right" })</div>
+
+                        <div class="col-sm-3">@Html.LabelFor(model => model.Chassi, null, new { @class = "left" })</div>
+                        <div class="col-sm-9 left">@Html.Label(Model?.Chassi, new { @class = "right" })</div>
+                    </div>
+                    <div class="col-sm-3 col-sm-4 col-xs-6">
+                        @if (Model.Imagem != null && Model.Imagem.InputStream != null)
+                        {                          
+                            <div class="thumbnail_container">
+                                <div class="thumbnail">
+                                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Imagem.ImagemParaByte())" width="90" height="90" class="img-responsive center-block" />
+                                </div>
+                            </div>                         
+                          }
+                      </div>
+        </div>
                 </div>
-            </div>
     </div>  
 </section>

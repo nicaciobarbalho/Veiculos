@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Veiculos.Web.Extensions;
 
 namespace Veiculos.Web.Models
 {
@@ -30,7 +31,7 @@ namespace Veiculos.Web.Models
 
         [Display(Name = "Foto")]
         public HttpPostedFileBase Imagem { get; set; }
-        
+
         public int IdModelo { get; set; }
         public string DescricaoModelo { get; set; }
         public int IdFabricante { get; set; }

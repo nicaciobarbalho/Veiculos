@@ -42,5 +42,11 @@ namespace Veiculos.Web.Controllers
 
             return View("../Veiculo/Placa");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegistrarVenda(Models.VendaModel model)
+        {
+            return View();
+        }
     }
 }
