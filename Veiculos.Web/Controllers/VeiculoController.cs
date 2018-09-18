@@ -87,5 +87,17 @@ namespace Veiculos.Web.Controllers
             Session["Veiculo"] = v;
             return RedirectToAction(acao, controlador);
         }
+
+        [HttpPost]
+        public JsonResult Placa(string placa)
+        {          
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> service = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
+            var veiculos = service.BuscarTodos(f => f.Placa.StartsWith(placa));
+
+            var CityName = (from N in veiculos
+                            select new { N.Id, N.Placa });
+
+            return Json(CityName, JsonRequestBehavior.AllowGet);
+        }
     }
 }

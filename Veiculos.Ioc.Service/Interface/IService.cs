@@ -9,7 +9,7 @@ namespace Veiculos.Ioc.Service.Interface
 {
     public interface IService<T> 
     {
-        IQueryable<T> BuscarTodos();
+        IQueryable<T> BuscarTodos(System.Linq.Expressions.Expression<Func<T, bool>> where = null);
         T Buscar(int id);
         T Buscar(System.Linq.Expressions.Expression<Func<T, bool>> where = null);
         T Inserir(T modelo);

@@ -40,9 +40,9 @@ namespace Veiculos.Ioc.Service
             return this.repositorioGenerico.Insert(usuario);
         }
 
-        public IQueryable<T> BuscarTodos()
+        public IQueryable<T> BuscarTodos(System.Linq.Expressions.Expression<Func<T, bool>> where = null)
         {
-            return this.repositorioGenerico.FindAll();
+            return this.repositorioGenerico.FindAll(where);
         }
 
         public T Buscar(int id)

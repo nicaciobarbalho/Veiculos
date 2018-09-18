@@ -112,8 +112,17 @@
                                                     </div>
 
                                                     <div id="IdVendaVeiculo" style="display:none">
-                                                            Veículo
-                                                    </div>
+                                                       
+                                                        <div class="col-sm-3 control-label" style="text-align:left;">
+                                                            @Html.Label("Placa", null, new { @class = "col-md-2 control-label" })
+                                                        </div>
+                                                        <div class="col-sm-9">
+                                                            @Html.ValidationMessage("placa", null, new { @class = "text-danger" })
+
+                                                            @Html.TextBox("placa", null, new { @class = "form-control", @name = "placa" })
+                                                        </div>
+                                                           
+                                                     </div>
 
                                                     <div class="col-sm-3 col-sm-offset-3 control-label" style="text-align:left;">
 
@@ -159,6 +168,27 @@
 <script language="javascript" type="text/javascript">
 
     $(document).ready(function () {
+
+        $("#placa").autocomplete({
+            source: function (request, response) {
+                console.log(request.term);
+                $.ajax({
+                    url: "/Veiculo/Placa",
+                    type: "POST",
+                    dataType: "json",
+                    data: { placa: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            console.log("Placa: " + item.Placa);
+                            return { label: item.Placa, value: item.Id };
+                        }))
+
+                    }
+                })
+            }
+        });
+
+
 
         $("#IdFormaPagamento").change(function () {
             
