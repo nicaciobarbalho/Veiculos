@@ -31,7 +31,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="row center-block">
-                            @using (Html.BeginForm("RegistrarVenda", "Vender", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "submitForm" }))
+                            @using (Html.BeginForm("RegistrarVenda", "Vender", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "submitForm", autocomplete = "off" }))
                             {
 
                                 @Html.AntiForgeryToken()
@@ -114,18 +114,19 @@
                                                     <div id="IdVendaVeiculo" style="display:none">
                                                        
                                                         <div class="col-sm-3 control-label" style="text-align:left;">
-                                                            @Html.Label("Placa", null, new { @class = "col-md-2 control-label" })
+                                                            @Html.Label("Placa", null, new { @class = "left" })
                                                         </div>
-                                                        <div class="col-sm-9">
-                                                            @Html.ValidationMessage("placa", null, new { @class = "text-danger" })
-
-                                                            @Html.TextBox("placa", null, new { @class = "form-control", @name = "placa" })
+                                                        
+                                                        <div class="col-sm-9 autocomplete">                                                          
+                                                            @Html.TextBox("Placa", null, new { @class = "form-control", @name = "Placa" })
+                                                            @Html.Hidden("ValorVeiculo")
+                                                            @Html.Hidden("IdVeiculo")                                                                                                          
                                                         </div>
                                                            
                                                      </div>
 
                                                     <div class="col-sm-3 col-sm-offset-3 control-label" style="text-align:left;">
-
+                                                        <br />
                                                         <div id="btnAddBook" class="btn icon-btn btn-success" onclick="addRow();">
                                                             <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
                                                             Adicionar
@@ -169,7 +170,7 @@
 
     $(document).ready(function () {
 
-        $("#placa").autocomplete({
+        $("#Placa").autocomplete({
             source: function (request, response) {
                 console.log(request.term);
                 $.ajax({
@@ -179,8 +180,13 @@
                     data: { placa: request.term },
                     success: function (data) {
                         response($.map(data, function (item) {
-                            console.log("Placa: " + item.Placa);
-                            return { label: item.Placa, value: item.Id };
+                            console.log("Placa: " + item.Veiculo);
+                             $("#IdVeiculo").val(item.Id);
+                             $("#ValorVeiculo").val(item.Preco);
+                            return {
+                                label: item.Id + ' - ' + item.Veiculo,
+                                value: item.Veiculo
+                            };
                         }))
 
                     }
@@ -191,9 +197,9 @@
 
 
         $("#IdFormaPagamento").change(function () {
-            
+
             var idFormaPagamento = $("#IdFormaPagamento option:selected").val();
-        
+
             if (idFormaPagamento == 4) {
                 $("#IdVendaNormal").attr("style", "display:none");
                 $("#IdVendaVeiculo").attr("style", "display:normal");
@@ -206,8 +212,6 @@
 
     });
 
-   
-
         function addRow() {
 
             @{
@@ -216,12 +220,21 @@
 
             var index = $("#tbBooks").children("tr").length + 1;
             var idFormaPagamento = $("#IdFormaPagamento option:selected").val();
-            var txtFormaPagamento = $("#IdFormaPagamento option:selected").text();
-            var valor = $("#IdValor").val();
+            var txtFormaPagamento = "";
+            var valor = 0;
+            if (idFormaPagamento == 4) {
+                txtFormaPagamento = $("#Placa").val();
+                valor = $("#ValorVeiculo").val();
+            }
+            else {
+                txtFormaPagamento = $("#IdFormaPagamento option:selected").text();
+                valor = $("#IdValor").val();
+            }
+
 
             var indexCell = "<td scope='row'><input name='Pagamentos.Index' type='hidden' value='" + index + "' />" + index + "</td>";
             var formaPagamentoCell = "<td><input id='Pagamentos_" + index + "__IdFormaPagamento' name='Pagamentos[" + index + "].IdFormaPagamento' type='hidden' value='" + idFormaPagamento + "' />" + txtFormaPagamento + "</td>";
-            var valorCell = "<td><input id='Pagamentos_" + index + "__IdFormaPagamento' name='Pagamentos[" + index + "].Quantia' type='hidden' value='" + valor + "' />" + valor + "</td>";            
+            var valorCell = "<td><input id='Pagamentos_" + index + "__IdFormaPagamento' name='Pagamentos[" + index + "].Quantia' type='hidden' value='" + valor + "' />" + valor + "</td>";
             var removeCell = "<td><div id='btnAddBook' class='btn icon-btn btn-warning' onclick='removeRow(" + index + ");'><span class='glyphicon btn-glyphicon glyphicon-minus img-circle text-warning'></span>Remover</div></td>";
 
             var newRow = "<tr id='trBook" + index + "'>" +

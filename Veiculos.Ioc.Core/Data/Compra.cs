@@ -10,6 +10,9 @@ namespace Veiculos.Ioc.Core.Data
     public class Compra : BaseEntity
     {
         public int IdVeiculo { get; set; }
+        [ForeignKey("IdVeiculo")]
+        public virtual Veiculo Veiculo { get; set; }
+
         public DateTime Data { get; set; }
         public decimal Preco { get; set; }
         public string Obs { get; set; }

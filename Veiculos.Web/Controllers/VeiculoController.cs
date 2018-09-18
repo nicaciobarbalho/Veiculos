@@ -80,9 +80,7 @@ namespace Veiculos.Web.Controllers
                 DescricaoFabricante = veiculo.Modelo.Fabricante.Descricao,
                Imagem = (HttpPostedFileBase)new MemoryPostedFile(veiculo.Foto)
         };
-
   
-
             Session.Remove("Veiculo");
             Session["Veiculo"] = v;
             return RedirectToAction(acao, controlador);
@@ -90,14 +88,30 @@ namespace Veiculos.Web.Controllers
 
         [HttpPost]
         public JsonResult Placa(string placa)
-        {          
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> service = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
-            var veiculos = service.BuscarTodos(f => f.Placa.StartsWith(placa));
+        {
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> serviceCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
 
-            var CityName = (from N in veiculos
-                            select new { N.Id, N.Placa });
+            //var result = (
+            // from v in serviceVeiculo.BuscarTodos(f => f.IdStatusVeiculo == 1 && f.Placa.StartsWith(placa))
+            // select new
+            // {
+            //     v.Id,
+            //     Veiculo = v.Placa + "/" + v.Modelo.Descricao + "/" + v.Modelo.Fabricante.Descricao + "/" + v.AnoFabricacao.ToString(),
+            //     Preco = 100
+            // }
+            // );
 
-            return Json(CityName, JsonRequestBehavior.AllowGet);
+            var result = (from c in serviceCompra.BuscarTodos(g => g.Veiculo.IdStatusVeiculo == 1 && g.Veiculo.Placa.StartsWith(placa)) 
+                select new
+                {
+                    Id = c.Veiculo.Id,
+                    Veiculo = c.Veiculo.Placa + "/" + c.Veiculo.Modelo.Descricao + "/" + c.Veiculo.Modelo.Fabricante.Descricao + "/" + c.Veiculo.AnoFabricacao.ToString(),
+                    c.Preco
+                }
+                );
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
