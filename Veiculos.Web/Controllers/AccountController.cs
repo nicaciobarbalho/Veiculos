@@ -492,6 +492,7 @@ namespace Veiculos.Web.Controllers
             var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,userLogin),
+                    new Claim(ClaimTypes.i,userLogin),
 
                   
                     new Claim(ClaimTypes.PrimarySid,userId.ToString()),

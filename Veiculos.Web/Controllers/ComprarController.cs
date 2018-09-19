@@ -52,7 +52,7 @@ namespace Veiculos.Web.Controllers
         {
             var Veiculo = Session["Veiculo"] as Models.VeiculoModel;
     
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || model.Id == -1)
             {
                 if (model.Id == -1) ModelState.AddModelError("", "Erro ao salvar!");
                 if (model.Preco <= 0) ModelState.AddModelError("", "Informe um preço!");
@@ -62,9 +62,7 @@ namespace Veiculos.Web.Controllers
                 return View(model);
             }
 
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> serviceCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
-
-            Ioc.Core.Data.Compra c = new Ioc.Core.Data.Compra()
+            Ioc.Core.Data.Compra compra = new Ioc.Core.Data.Compra()
             {
                 Data = model.Data,
                 Preco = model.Preco,
@@ -72,20 +70,22 @@ namespace Veiculos.Web.Controllers
                 Obs = model.Obs,
             };
 
-            c.PartePagamento = new Ioc.Core.Data.PartePagamento()
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> servicoCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
+            compra = servicoCompra.Inserir(compra);
+
+            if (compra.Id > 0)
             {
-                Quantia = model.Preco,
-                IdFormaPagamento = model.IdFormaPagamento,                
-            };
-            c.PartePagamento.Compra = new List<Ioc.Core.Data.Compra>().AsQueryable();
-            c.PartePagamento.Compra.Append(c);
+                Ioc.Core.Data.PartePagamento pp = new Ioc.Core.Data.PartePagamento()
+                {
+                    Quantia = model.Preco,
+                    IdFormaPagamento = model.IdFormaPagamento,
+                    IdCompra = compra.Id
+                };
 
-            serviceCompra.Inserir(c);
+                Veiculos.Ioc.Service.Service<Ioc.Core.Data.PartePagamento> servicoPP = new Ioc.Service.Service<Ioc.Core.Data.PartePagamento>();
+                servicoPP.Inserir(pp);
 
-
-            if (c.Id > 0)
-            {
-                StatusVeiculo.StatusAtualizar(new Ioc.Core.Data.Veiculo() { Id = c.IdVeiculo }, StatusVeiculo.Status.DisponivelParaVenda);
+                StatusVeiculo.StatusAtualizar(new Ioc.Core.Data.Veiculo() { Id = compra.IdVeiculo }, StatusVeiculo.Status.DisponivelParaVenda);
                 return RedirectToAction("Home").WithSuccess("Compra salva com sucesso!");
             }
             else
@@ -157,7 +157,8 @@ namespace Veiculos.Web.Controllers
                           {
                               Id = c.Veiculo.Id,
                               Veiculo = c.Veiculo.Placa + "/" + c.Veiculo.Modelo.Descricao + "/" + c.Veiculo.Modelo.Fabricante.Descricao + "/" + c.Veiculo.AnoFabricacao.ToString(),
-                              c.Preco
+                              c.Preco,
+                              IdCompra = c.Id
                           }
                 );
 

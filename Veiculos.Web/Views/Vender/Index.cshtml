@@ -121,7 +121,8 @@
                                                         <div class="col-sm-9 autocomplete">                                                          
                                                             @Html.TextBox("Placa", null, new { @class = "form-control", @name = "Placa" })
                                                             @Html.Hidden("ValorVeiculo")
-                                                            @Html.Hidden("IdVeiculo")                                                                                                          
+                                                            @Html.Hidden("IdVeiculo")
+                                                            @Html.Hidden("IdCompra")                                                                                                          
                                                         </div>
                                                            
                                                      </div>
@@ -184,6 +185,7 @@
                             console.log("Placa: " + item.Veiculo);
                              $("#IdVeiculo").val(item.Id);
                              $("#ValorVeiculo").val(item.Preco);
+                             $("#IdCompra").val(item.IdCompra);
                             return {
                                 label: item.Id + ' - ' + item.Veiculo,
                                 value: item.Veiculo
@@ -223,9 +225,11 @@
             var idFormaPagamento = $("#IdFormaPagamento option:selected").val();
             var txtFormaPagamento = "";
             var valor = 0;
+            var idCompra = 0;
             if (idFormaPagamento == 4) {
                 txtFormaPagamento = $("#Placa").val();
                 valor = $("#ValorVeiculo").val();
+                idCompra = $("#IdCompra").val();
             }
             else {
                 txtFormaPagamento = $("#IdFormaPagamento option:selected").text();
@@ -238,7 +242,7 @@
             }
             var indexCell = "<td scope='row'><input name='Pagamentos.Index' type='hidden' value='" + index + "' />" + index + "</td>";
             var formaPagamentoCell = "<td><input id='Pagamentos_" + index + "__IdFormaPagamento' name='Pagamentos[" + index + "].IdFormaPagamento' type='hidden' value='" + idFormaPagamento + "' />" + txtFormaPagamento + "</td>";
-            var valorCell = "<td><input id='Pagamentos_" + index + "__IdFormaPagamento' name='Pagamentos[" + index + "].Quantia' type='hidden' value='" + valor + "' />" + valor + "</td>";
+            var valorCell = "<td><input id='Pagamentos_" + index + "__Quantia' name='Pagamentos[" + index + "].Quantia' type='hidden' value='" + valor + "' /> <input id='Pagamentos_" + index + "__IdCompra' name='Pagamentos[" + index + "].IdCompra' type='hidden' value='" + idCompra + "' />" + valor + "</td>";
             var removeCell = "<td><div id='btnAddPagamento' class='btn icon-btn btn-warning' onclick='removeRow(" + index + ");'><span class='glyphicon btn-glyphicon glyphicon-minus img-circle text-warning'></span>Remover</div></td>";
 
             var newRow = "<tr id='trPagamento" + index + "'>" +

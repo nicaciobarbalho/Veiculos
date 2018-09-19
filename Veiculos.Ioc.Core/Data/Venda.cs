@@ -11,7 +11,7 @@ namespace Veiculos.Ioc.Core.Data
         public DateTime Data { get; set; }
         public decimal Desconto { get; set; }
         public int IdStatusVenda { get; set; }
-        public string Comissao { get; set; }
+        public decimal Comissao { get; set; }
         public string Obs { get; set; }
         public decimal ValorTotal { get; set; }
 
@@ -19,9 +19,6 @@ namespace Veiculos.Ioc.Core.Data
         [ForeignKey("IdUsuario")]
         public virtual Usuario Usuario { get; set; }
 
-        public int IdPartePagamento { get; set; }
-        [ForeignKey("IdPartePagamento")]
-        public virtual PartePagamento PartePagamento { get; set; }
     }
 
 }

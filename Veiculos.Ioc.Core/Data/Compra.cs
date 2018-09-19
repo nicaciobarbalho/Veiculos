@@ -16,9 +16,5 @@ namespace Veiculos.Ioc.Core.Data
         public DateTime Data { get; set; }
         public decimal Preco { get; set; }
         public string Obs { get; set; }
-
-        public int IdPartePagamento { get; set; }        
-        [ForeignKey("IdPartePagamento")]
-        public virtual PartePagamento PartePagamento { get; set; }
     }
 }

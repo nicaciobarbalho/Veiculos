@@ -10,6 +10,7 @@ namespace Veiculos.Web.Models
     {
         public int IdFormaPagamento { get; set; }
         public decimal Quantia { get; set; }
+        public int IdCompra { get; set; }
     }
 
     public class FormaPagamentoModel : BaseVeiculosModel
