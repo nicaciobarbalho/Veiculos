@@ -64,9 +64,24 @@ namespace Veiculos.Web.Controllers
 
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> serviceCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
 
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Venda> serviceVenda = new Ioc.Service.Service<Ioc.Core.Data.Venda>();
+            Ioc.Core.Data.Compra c = new Ioc.Core.Data.Compra()
+            {
+                Data = model.Data,
+                Preco = model.Preco,
+                IdVeiculo = idVeiculo,
+                Obs = model.Obs,
+            };
 
-            var c = serviceCompra.Inserir(new Ioc.Core.Data.Compra() { Data = model.Data, IdFormaPagamento = model.IdFormaPagamento, Preco = model.Preco, IdVeiculo = idVeiculo, Obs = model.Obs });
+            c.PartePagamento = new Ioc.Core.Data.PartePagamento()
+            {
+                Quantia = model.Preco,
+                IdFormaPagamento = model.IdFormaPagamento,                
+            };
+            c.PartePagamento.Compra = new List<Ioc.Core.Data.Compra>().AsQueryable();
+            c.PartePagamento.Compra.Append(c);
+
+            serviceCompra.Inserir(c);
+
 
             if (c.Id > 0)
             {

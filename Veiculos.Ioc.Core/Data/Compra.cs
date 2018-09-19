@@ -17,8 +17,8 @@ namespace Veiculos.Ioc.Core.Data
         public decimal Preco { get; set; }
         public string Obs { get; set; }
 
-        public int IdFormaPagamento { get; set; }
-        [ForeignKey("IdFormaPagamento")]
-        public virtual FormaPagamento FormaPagamento { get; set; }
+        public int IdPartePagamento { get; set; }        
+        [ForeignKey("IdPartePagamento")]
+        public virtual PartePagamento PartePagamento { get; set; }
     }
 }
