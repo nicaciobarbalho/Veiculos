@@ -85,33 +85,5 @@ namespace Veiculos.Web.Controllers
             Session["Veiculo"] = v;
             return RedirectToAction(acao, controlador);
         }
-
-        [HttpPost]
-        public JsonResult Placa(string placa)
-        {
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> serviceCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
-
-            //var result = (
-            // from v in serviceVeiculo.BuscarTodos(f => f.IdStatusVeiculo == 1 && f.Placa.StartsWith(placa))
-            // select new
-            // {
-            //     v.Id,
-            //     Veiculo = v.Placa + "/" + v.Modelo.Descricao + "/" + v.Modelo.Fabricante.Descricao + "/" + v.AnoFabricacao.ToString(),
-            //     Preco = 100
-            // }
-            // );
-
-            var result = (from c in serviceCompra.BuscarTodos(g => g.Veiculo.IdStatusVeiculo == 1 && g.Veiculo.Placa.StartsWith(placa)) 
-                select new
-                {
-                    Id = c.Veiculo.Id,
-                    Veiculo = c.Veiculo.Placa + "/" + c.Veiculo.Modelo.Descricao + "/" + c.Veiculo.Modelo.Fabricante.Descricao + "/" + c.Veiculo.AnoFabricacao.ToString(),
-                    c.Preco
-                }
-                );
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
     }
 }

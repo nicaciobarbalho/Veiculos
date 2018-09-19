@@ -92,11 +92,12 @@
                                             <div class="row center-block">
                                               
                                                 <div class="form-group">
+                                                    @Html.ValidationMessage("IdFormaPagamento", new { @class = "text-danger" })
                                                     <div class="col-sm-3 control-label" style="text-align:left;">
                                                         @Html.Label("", "Forma de pagamento", htmlAttributes: new { @class = "left" })
                                                     </div>
                                                     <div class="col-sm-9">
-                                                        @Html.DropDownList("IdFormaPagamento", ViewBag.IdFormaPagamento as SelectList, htmlAttributes: new { @class = "form-control" })                                                        
+                                                        @Html.DropDownList("IdFormaPagamento", ViewBag.IdFormaPagamento as SelectList, htmlAttributes: new { @class = "form-control" })
                                                     </div>
                                                 </div>
 
@@ -127,7 +128,7 @@
 
                                                     <div class="col-sm-3 col-sm-offset-3 control-label" style="text-align:left;">
                                                         <br />
-                                                        <div id="btnAddBook" class="btn icon-btn btn-success" onclick="addRow();">
+                                                        <div id="btnAddPagamento" class="btn icon-btn btn-success" onclick="addRow();">
                                                             <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
                                                             Adicionar
                                                         </div>
@@ -141,7 +142,7 @@
                                                                 <th scope="col">Valor</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody id="tbBooks"></tbody>
+                                                        <tbody id="tbPagamentos"></tbody>
                                                     </table>
 
                                                 </div>
@@ -174,7 +175,7 @@
             source: function (request, response) {
                 console.log(request.term);
                 $.ajax({
-                    url: "/Veiculo/Placa",
+                    url: "/Comprar/Placa",
                     type: "POST",
                     dataType: "json",
                     data: { placa: request.term },
@@ -218,7 +219,7 @@
                 Model?.Pagamentos.Add(new PagamentoModel());
             }
 
-            var index = $("#tbBooks").children("tr").length + 1;
+            var index = $("#tbPagamentos").children("tr").length + 1;
             var idFormaPagamento = $("#IdFormaPagamento option:selected").val();
             var txtFormaPagamento = "";
             var valor = 0;
@@ -231,31 +232,42 @@
                 valor = $("#IdValor").val();
             }
 
+            if (valor == null || valor == '' || !$.isNumeric(valor) || parseFloat(String(valor)) <= 0) {
 
+                return;
+            }
             var indexCell = "<td scope='row'><input name='Pagamentos.Index' type='hidden' value='" + index + "' />" + index + "</td>";
             var formaPagamentoCell = "<td><input id='Pagamentos_" + index + "__IdFormaPagamento' name='Pagamentos[" + index + "].IdFormaPagamento' type='hidden' value='" + idFormaPagamento + "' />" + txtFormaPagamento + "</td>";
             var valorCell = "<td><input id='Pagamentos_" + index + "__IdFormaPagamento' name='Pagamentos[" + index + "].Quantia' type='hidden' value='" + valor + "' />" + valor + "</td>";
-            var removeCell = "<td><div id='btnAddBook' class='btn icon-btn btn-warning' onclick='removeRow(" + index + ");'><span class='glyphicon btn-glyphicon glyphicon-minus img-circle text-warning'></span>Remover</div></td>";
+            var removeCell = "<td><div id='btnAddPagamento' class='btn icon-btn btn-warning' onclick='removeRow(" + index + ");'><span class='glyphicon btn-glyphicon glyphicon-minus img-circle text-warning'></span>Remover</div></td>";
 
-            var newRow = "<tr id='trBook" + index + "'>" +
+            var newRow = "<tr id='trPagamento" + index + "'>" +
                 indexCell + formaPagamentoCell + valorCell + removeCell + "</tr>";
-            $("#tbBooks").append(newRow);
+            $("#tbPagamentos").append(newRow);
+            limparFormaPagamento();
             tabelaVisivel();
         }
 
         function removeRow(id) {
-            var controlToBeRemoved = "#trBook" + id;
+            var controlToBeRemoved = "#trPagamento" + id;
             $(controlToBeRemoved).remove();
             tabelaVisivel();
     }
 
     function tabelaVisivel() {
 
-        var index = $("#tbBooks").children("tr").length;
+        var index = $("#tbPagamentos").children("tr").length;
         if (index > 0) {
             $("#IdTabelaFormaPagamento").attr("style", "display:normal");
         } else {
             $("#IdTabelaFormaPagamento").attr("style", "display:none");
         }
+    }
+
+    function limparFormaPagamento() {
+        $("#IdFormaPagamento").val("1");
+        $("#Placa").val("");
+        $("#ValorVeiculo").val("");
+        $("#IdValor").val("");
     }
 </script>

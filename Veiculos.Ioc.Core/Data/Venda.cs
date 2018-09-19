@@ -19,9 +19,9 @@ namespace Veiculos.Ioc.Core.Data
         [ForeignKey("IdUsuario")]
         public virtual Usuario Usuario { get; set; }
 
-        public int IdFormaPagamento { get; set; }
-        [ForeignKey("IdFormaPagamento")]
-        public virtual FormaPagamento FormaPagamento { get; set; }
+        public int IdPartePagamento { get; set; }
+        [ForeignKey("IdPartePagamento")]
+        public virtual PartePagamento PartePagamento { get; set; }
     }
 
 }

@@ -62,9 +62,11 @@ namespace Veiculos.Web.Controllers
                 return View(model);
             }
 
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> service = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> serviceCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
 
-            var c = service.Inserir(new Ioc.Core.Data.Compra() { Data = model.Data, IdFormaPagamento = model.IdFormaPagamento, Preco = model.Preco, IdVeiculo = idVeiculo, Obs = model.Obs });
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Venda> serviceVenda = new Ioc.Service.Service<Ioc.Core.Data.Venda>();
+
+            var c = serviceCompra.Inserir(new Ioc.Core.Data.Compra() { Data = model.Data, IdFormaPagamento = model.IdFormaPagamento, Preco = model.Preco, IdVeiculo = idVeiculo, Obs = model.Obs });
 
             if (c.Id > 0)
             {
@@ -128,6 +130,23 @@ namespace Veiculos.Web.Controllers
             Session.Remove("Veiculo");
             Session["Veiculo"] = v;
             return controlador == null ? View() : View($"{controlador}/Index", compra);               
+        }
+
+        [HttpPost]
+        public JsonResult Placa(string placa)
+        {
+            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> service = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
+
+            var result = (from c in service.BuscarTodos(g => g.Veiculo.IdStatusVeiculo == 1 && g.Veiculo.Placa.StartsWith(placa))
+                          select new
+                          {
+                              Id = c.Veiculo.Id,
+                              Veiculo = c.Veiculo.Placa + "/" + c.Veiculo.Modelo.Descricao + "/" + c.Veiculo.Modelo.Fabricante.Descricao + "/" + c.Veiculo.AnoFabricacao.ToString(),
+                              c.Preco
+                          }
+                );
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Venda/Comprar/Details/5

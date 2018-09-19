@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace Veiculos.Ioc.Core.Data
@@ -16,7 +17,11 @@ namespace Veiculos.Ioc.Core.Data
 
         public int IdVenda { get; set; }
         [ForeignKey("IdVenda")]
-        public virtual Venda Venda { get; set; }      
+        public virtual IQueryable<Venda> Venda { get; set; }
+
+        public int IdCompra { get; set; }
+        [ForeignKey("IdCompra")]
+        public virtual IQueryable<Compra> Compra { get; set; }
     }
 
 }
