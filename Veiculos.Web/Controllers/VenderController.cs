@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Security.Principal;
+using Veiculos.Web.Extensions.Alerts;
 
 namespace Veiculos.Web.Controllers
 {
@@ -47,6 +50,11 @@ namespace Veiculos.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegistrarVenda(Models.VendaModel model)
         {
+            foreach(var erro in ModelState.Where(e => e.Key.StartsWith("Veiculo")))
+            {
+                erro.Value.Errors.Clear();
+            }
+
             if (!ModelState.IsValid)
             {
                 this.FormaPagamento();
@@ -54,9 +62,9 @@ namespace Veiculos.Web.Controllers
                 Models.VeiculoModel veiculo = (Models.VeiculoModel)Session["Veiculo"];
                 model.Veiculo = veiculo;
 
-                return View(model);
+                return View("Index", model);
             }
-
+            
             Ioc.Core.Data.Venda venda = new Ioc.Core.Data.Venda()
             {
                 Data = model.Data,
@@ -64,7 +72,8 @@ namespace Veiculos.Web.Controllers
                 Desconto = model.Desconto,
                 IdStatusVenda = 3,
                 IdUsuario =  int.Parse(User.Identity.GetUserId().ToString()),
-                ValorTotal = model.Pagamentos.Sum(f => f.Quantia),                
+                ValorTotal = model.Pagamentos.Sum(f => f.Quantia),
+                IdVeiculo = model.Veiculo.Id,           
                 Obs = model.Obs,
             };
 
@@ -80,15 +89,48 @@ namespace Veiculos.Web.Controllers
                     {
                         Quantia = pag.Quantia,
                         IdFormaPagamento = pag.IdFormaPagamento,
-                        IdVenda = venda.Id,
-                        IdCompra = pag.IdCompra
+                        IdVenda = venda.Id                        
                     };
-                                       
+
+                    if(pag.IdCompra > 0)
+                        pp.IdCompra = pag.IdCompra;
+
                     servicoPP.Inserir(pp);
+                }
+
+                if (User.IsInRole("Gerente"))
+                {
+                    StatusAtualizacao.VeiculoAtualizar(new Ioc.Core.Data.Veiculo() { Id = model.Veiculo.Id }, StatusAtualizacao.StatusVeiculo.NaoPertenceLoja);
+
+                    foreach (var pag in model.Pagamentos.Where(f => f.IdCompra > 0))
+                    {
+                        Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> servicoCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
+
+                        var compra = servicoCompra.Buscar(pag.IdCompra);
+
+                        StatusAtualizacao.VeiculoAtualizar(new Ioc.Core.Data.Veiculo() { Id = compra.IdVeiculo }, StatusAtualizacao.StatusVeiculo.NaoPertenceLoja);
+                    }
+
+                    return RedirectToAction("Home").WithSuccess("Venda salva com sucesso!");
+                }
+                else
+                {
+                    StatusAtualizacao.VeiculoAtualizar(new Ioc.Core.Data.Veiculo() { Id = model.Veiculo.Id }, StatusAtualizacao.StatusVeiculo.EmProcessoVenda);
+
+                    foreach (var pag in model.Pagamentos.Where(f => f.IdCompra > 0))
+                    {
+                        Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> servicoCompra = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
+
+                        var compra = servicoCompra.Buscar(pag.IdCompra);
+
+                        StatusAtualizacao.VeiculoAtualizar(new Ioc.Core.Data.Veiculo() { Id = compra.IdVeiculo }, StatusAtualizacao.StatusVeiculo.EmProcessoVenda);
+                    }
+
+                    return RedirectToAction("Home").WithInfo("Aguardando autorização do gerente.");
                 }
             }
 
-                return View();
+            return View("Index", model);
         }
     }
 }

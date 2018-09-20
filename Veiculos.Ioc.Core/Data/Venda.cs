@@ -19,6 +19,10 @@ namespace Veiculos.Ioc.Core.Data
         [ForeignKey("IdUsuario")]
         public virtual Usuario Usuario { get; set; }
 
+        public int IdVeiculo { get; set; }
+        [ForeignKey("IdVeiculo")]
+        public virtual Veiculo Veiculo { get; set; }
+
     }
 
 }

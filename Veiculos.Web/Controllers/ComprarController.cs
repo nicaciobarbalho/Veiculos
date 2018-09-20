@@ -85,7 +85,7 @@ namespace Veiculos.Web.Controllers
                 Veiculos.Ioc.Service.Service<Ioc.Core.Data.PartePagamento> servicoPP = new Ioc.Service.Service<Ioc.Core.Data.PartePagamento>();
                 servicoPP.Inserir(pp);
 
-                StatusVeiculo.StatusAtualizar(new Ioc.Core.Data.Veiculo() { Id = compra.IdVeiculo }, StatusVeiculo.Status.DisponivelParaVenda);
+                StatusAtualizacao.VeiculoAtualizar(new Ioc.Core.Data.Veiculo() { Id = compra.IdVeiculo }, StatusAtualizacao.StatusVeiculo.DisponivelParaVenda);
                 return RedirectToAction("Home").WithSuccess("Compra salva com sucesso!");
             }
             else
