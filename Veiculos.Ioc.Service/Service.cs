@@ -25,19 +25,19 @@ namespace Veiculos.Ioc.Service
             this.repositorioGenerico = repository;
         }
 
-        public int Apagar(T usuario)
+        public int Apagar(T modelo)
         {
-            return this.repositorioGenerico.Delete(usuario);
+            return this.repositorioGenerico.Delete(modelo);
         }
 
-        public int Atualizar(T usuario)
+        public int Atualizar(T modelo)
         {
-            return this.repositorioGenerico.Edit(usuario);
+            return this.repositorioGenerico.Edit(modelo);
         }
 
-        public T Inserir(T usuario)
+        public T Inserir(T modelo)
         {
-            return this.repositorioGenerico.Insert(usuario);
+            return this.repositorioGenerico.Insert(modelo);
         }
 
         public IQueryable<T> BuscarTodos(System.Linq.Expressions.Expression<Func<T, bool>> where = null)

@@ -10,6 +10,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -46,6 +47,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="dropdown-item" href="#">@Html.ActionLink("Comprar", "Home", "Comprar")</li>
                                     <li class="dropdown-item" href="#">@Html.ActionLink("Vender", "Home", "Vender")</li>
+                                    <li class="dropdown-item" href="#">@Html.ActionLink("Autorizar Venda", "Autorizar", "Vender")</li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">

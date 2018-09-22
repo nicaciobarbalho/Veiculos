@@ -12,7 +12,8 @@ namespace Veiculos.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-{version}.js",
-                "~/Scripts/jquery.autocomplete.js"
+                "~/Scripts/jquery.autocomplete.js",                
+                "~/Content/DataTables-1.10.18/js/jquery.dataTables.min.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -43,7 +44,8 @@ namespace Veiculos.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
                  "~/Content/Site.css",
-                 "~/Content/autocomplete.css"
+                 "~/Content/autocomplete.css",
+                 "~/Content/DataTables-1.10.18/css/jquery.dataTables.min.css"
                  ));
 
      
