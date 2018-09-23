@@ -469,6 +469,7 @@
     <Content Include="Views\Veiculo\Placa.cshtml" />
     <Content Include="Views\Veiculo\Veiculo.cshtml" />
     <Content Include="Views\Vender\Autorizar.cshtml" />
+    <Content Include="Views\Vender\Vendas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Veiculos\" />
