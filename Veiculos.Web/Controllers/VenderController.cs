@@ -271,13 +271,14 @@ namespace Veiculos.Web.Controllers
         public ActionResult EditarVenda(int id)
         {
             this.FormaPagamento();
-
+            
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Venda> servico = new Ioc.Service.Service<Ioc.Core.Data.Venda>();
 
             Ioc.Core.Data.Venda venda = servico.Buscar(id);
+            
             Models.VendaModel model = new Models.VendaModel()
             {
-                Id = venda.Id,
+                Id =  venda.Id,
                 Comissao = venda.Comissao,
                 Data = venda.Data,
                 Desconto = venda.Desconto,
@@ -292,9 +293,33 @@ namespace Veiculos.Web.Controllers
                     DescricaoModelo = venda.Veiculo.Modelo.Descricao,
                     IdFabricante = venda.Veiculo.Modelo.IdFabricante,
                     IdModelo = venda.Veiculo.Modelo.Id,
-                    Placa = venda.Veiculo.Placa
+                    Placa = venda.Veiculo.Placa,                    
                 }
             };
+
+            model.Pagamentos = new List<Models.PagamentoModel>();
+            int index = 1;
+            foreach (var pp in new Ioc.Service.Service<Ioc.Core.Data.PartePagamento>().BuscarTodos(f => f.IdVenda == id))
+            {
+                if(pp.IdCompra != null)
+                {
+                    pp.Compra = new Ioc.Service.Service<Ioc.Core.Data.Compra>().Buscar(pp.IdCompra.Value);
+                }
+
+                pp.FormaPagamento = new Ioc.Service.Service<Ioc.Core.Data.FormaPagamento>().Buscar(pp.IdFormaPagamento);
+
+                model.Pagamentos.Add(
+                    new Models.PagamentoModel()
+                    {
+                        Id = pp.Id,
+                        IdCompra = pp.IdCompra != null? pp.IdCompra.Value : 0,
+                        IdFormaPagamento = pp.IdFormaPagamento,
+                        Quantia = pp.Quantia,
+                        Index = index,
+                        DescricaoFormaPagamento = pp.IdCompra == null ? pp.FormaPagamento.Descricao : pp.Compra.Veiculo.Placa + "/" + pp.Compra.Veiculo.Modelo.Descricao + "/" + pp.Compra.Veiculo.Modelo.Fabricante.Descricao + "/" + pp.Compra.Veiculo.AnoFabricacao.ToString(),
+                    }
+                    );
+            }
 
           return View("Index", model);
         }

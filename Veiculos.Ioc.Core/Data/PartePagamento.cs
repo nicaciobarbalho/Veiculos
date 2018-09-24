@@ -17,11 +17,11 @@ namespace Veiculos.Ioc.Core.Data
 
         public int? IdVenda { get; set; }
         [ForeignKey("IdVenda")]
-        public virtual IQueryable<Venda> Venda { get; set; }
+        public virtual Venda Venda { get; set; }
 
         public int? IdCompra { get; set; }
         [ForeignKey("IdCompra")]
-        public virtual IQueryable<Compra> Compra { get; set; }
+        public virtual Compra Compra { get; set; }
     }
 
 }
