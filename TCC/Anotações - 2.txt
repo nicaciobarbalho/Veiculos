@@ -1,0 +1,41 @@
+Nome do Sistema Operacional	Microsoft Windows 10 Education
+Versão	10.0.17134 Compilação 17134
+Outra Descrição do Sistema Operacional 	Não disponível
+Fabricante do Sistema Operacional	Microsoft Corporation
+Nome do sistema	DESKTOP-ORNM0B4
+Fabricante do sistema	Dell Inc.
+Modelo do sistema	Inspiron 3437
+Tipo do sistema	PC baseado em X64
+SKU do sistema	Inspiron 3437
+Processador	Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz, 1601 Mhz, 2 Núcleo(s), 4 Processador(es) Lógico(s)
+Versão/data do BIOS	Dell Inc. A09, 24/01/2014
+Versão do SMBIOS	2.7
+Versão do Controlador Incorporado	0.09
+Modo da BIOS	UEFI
+Fabricante da placa-base	Dell Inc.
+Modelo da placa-base	Não disponível
+Nome da placa-base	Placa Base
+Função da Plataforma	Móvel
+Estado da Inicialização Segura	Ativado
+Configuração PCR7	Ligação Impossível
+Pasta do Windows	C:\WINDOWS
+Pasta do sistema	C:\WINDOWS\system32
+Dispositivo de inicialização	\Device\HarddiskVolume2
+Localidade	Brasil
+Camada de Abstração de Hardware	Versão = "10.0.17134.285"
+Nome de usuário	DESKTOP-ORNM0B4\Nicácio
+Fuso horário	Hora oficial do Brasil
+Memória Física (RAM) Instalada	8,00 GB
+Memória física total	7,16 GB
+Memória física disponível	1,70 GB
+Memória virtual total	11,0 GB
+Memória virtual disponível	3,44 GB
+Espaço do arquivo de paginação	3,88 GB
+Arquivo de paginação	C:\pagefile.sys
+Proteção de DMA de Kernel	Não disponível
+Segurança baseada em virtualização	Não habilitado
+Suporte à Criptografia de Dispositivo	Motivos da falha da criptografia de dispositivo automática: TPM não utilizável, Associação PCR7 não compatível, A Interface de Teste de Segurança de Hardware falhou e o dispositivo não é InstantGo, Barramento/dispositivos compatíveis com DMA não permitidos detectados, WinRE não configurado, TPM não utilizável
+Hyper-V - Extensões de Modo Monitor VM	Sim
+Hyper-V - Extensões de Conversão de Endereços de Segundo Nível	Sim
+Hyper-V - Virtualização Habilitada no Firmware	Sim
+Hyper-V - Proteção de Execução de Dados	Sim

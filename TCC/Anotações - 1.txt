@@ -1,0 +1,223 @@
+
+MVC - 5.2.4.0
+.NET FrameWork 4.7.2
+ASPX
+ASP.NET
+IOC
+EntityFramework - 6.0.0.0
+Repository
+
+Microsoft SQL Server 2016 (SP1) (KB3182545) - 13.0.4001.0 (X64)   Oct 28 2016 18:17:30   Copyright (c) Microsoft Corporation  Express Edition (64-bit) on Windows 10 Education 6.3 <X64> (Build 17134: ) 
+
+Microsoft Visual Studio Enterprise 2017 
+Versão 15.8.1
+VisualStudio.15.Release/15.8.1+28010.2003
+Microsoft .NET Framework
+Versão 4.7.03056
+
+Versão Instalada: Enterprise
+
+Visual C++ 2017   00369-90008-17080-AA778
+Microsoft Visual C++ 2017
+
+ASP.NET and Web Tools 2017   15.8.05074.0
+ASP.NET and Web Tools 2017
+
+ASP.NET Core Razor Language Services   15.8.31590
+Provides languages services for ASP.NET Core Razor.
+
+ASP.NET Web Frameworks and Tools 2012   4.0.30625.0
+For additional information, visit https://www.asp.net/
+
+ASP.NET Web Frameworks and Tools 2017   5.2.60618.0
+For additional information, visit https://www.asp.net/
+
+Assistentes do Microsoft Visual C++   1.0
+Assistentes do Microsoft Visual C++
+
+Azure App Service Tools v3.0.0   15.8.05023.0
+Azure App Service Tools v3.0.0
+
+Azure Data Lake Node   1.0
+This package contains the Data Lake integration nodes for Server Explorer.
+
+Azure Data Lake Tools for Visual Studio   2.3.3000.2
+Microsoft Azure Data Lake Tools for Visual Studio
+
+Azure Functions e Ferramentas de Trabalhos na Web   15.8.05023.0
+Azure Functions e Ferramentas de Trabalhos na Web
+
+Azure Stream Analytics Tools for Visual Studio   2.3.3000.2
+Microsoft Azure Stream Analytics Tools for Visual Studio
+
+Cookiecutter   15.8.18201.1
+Fornece ferramentas para localizar, instanciar e personalizar modelos no formato cookiecutter.
+
+Extensão de Depuração de Instantâneo   1.0
+Informações Detalhadas da Extensão do Visual Studio de Depuração de Instantâneo
+
+Extensão ResourcePackage   1.0
+Informações detalhadas sobre a extensão ResourcePackage do Visual Studio
+
+Extensão ResourcePackage   1.0
+Informações detalhadas sobre a extensão ResourcePackage do Visual Studio
+
+Ferramentas Comuns do Azure   1.10
+Fornece serviços comuns para serem usados por serviços móveis do Azure e ferramentas do Microsoft Azure.
+
+Ferramentas de C#   2.9.0-beta8-63208-01
+Componentes de C# usados no IDE. Dependendo do tipo de projeto e suas configurações, uma versão diferente do compilador pode ser usada.
+
+Ferramentas de Entrega Contínua da Microsoft para Visual Studio   0.4
+Simplificando a configuração da integração de build contínua e da entrega de build contínua por meio do IDE do Visual Studio.
+
+Ferramentas do Microsoft Azure   2.9
+Ferramentas do Microsoft Azure para Microsoft Visual Studio 2017 – v2.9.10730.2
+
+Ferramentas do R para Visual Studio   1.3.40517.1016
+Fornece o sistema do projeto, a janela do Interativo do R, a plotagem e mais para a linguagem de programação R.
+
+Ferramentas do TypeScript   15.8.20801.2001
+Ferramentas do TypeScript para Microsoft Visual Studio
+
+Ferramentas do Visual Basic   2.9.0-beta8-63208-01
+Componentes do Visual Basic usados no IDE. Dependendo do tipo de projeto e suas configurações, uma versão diferente do compilador pode ser usada.
+
+Ferramentas do Visual Studio para Contêineres   1.0
+Ferramentas do Visual Studio para Contêineres
+
+Ferramentas Node.js   1.4.20802.1 Commit Hash:97e1085d8b4b8e3e51c398e910177f87e86d135e
+Adiciona o suporte para desenvolvimento e para depuração dos aplicativos Node.js no Visual Studio
+
+Gerenciador de Pacotes do NuGet   4.6.0
+Gerenciador de Pacotes do NuGet no Visual Studio. Para obter mais informações sobre o NuGet, visite http://docs.nuget.org/.
+
+JavaScript Project System   2.0
+JavaScript Project System
+
+Merq   1.1.38 (5b3c069)
+Command Bus, Event Stream and Async Manager for Visual Studio extensions.
+
+Microsoft Azure HDInsight Azure Node   2.3.3000.2
+HDInsight Node under Azure Node
+
+Microsoft Azure Hive Query Language Service   2.3.3000.2
+Language service for Hive query
+
+Microsoft Azure Stream Analytics Language Service   2.3.3000.2
+Language service for Azure Stream Analytics
+
+Microsoft Azure Stream Analytics Node   1.0
+Azure Stream Analytics Node under Azure Node
+
+Microsoft JVM Debugger   1.0
+Provides support for connecting the Visual Studio debugger to JDWP compatible Java Virtual Machines
+
+Microsoft MI-Based Debugger   1.0
+Provides support for connecting Visual Studio to MI compatible debuggers
+
+Microsoft Visual Studio Tools for Containers   1.1
+Desenvolva, execute e valide seus aplicativos ASP.NET Core no ambiente de destino. Pressione F5 no seu aplicativo diretamente em um contêiner com depuração ou digite CTRL + F5 para editar e atualizar seu aplicativo sem precisar recompilar o contêiner.
+
+MLGen Package Extension   1.0
+MLGen Package Visual Studio Extension Detailed Info
+
+Mono Debugging for Visual Studio   4.11.7-pre (8955b2a)
+Support for debugging Mono processes with Visual Studio.
+
+Pacote de Ferramentas do Application Insights para Visual Studio   8.13.10627.1
+Ferramentas do Application Insights para Visual Studio
+
+Pacote do Host do Adaptador de Depuração do Visual Studio Code   1.0
+Camada de interoperabilidade para hospedar os adaptadores de depuração do Visual Studio Code no Visual Studio
+
+Pacote do VC do Microsoft Visual Studio   1.0
+Pacote do VC do Microsoft Visual Studio
+
+ProjectServicesPackage Extension   1.0
+ProjectServicesPackage Visual Studio Extension Detailed Info
+
+Python   15.8.18201.1
+Fornece IntelliSense, projetos, modelos, depuração, janelas interativas e outros suportes para desenvolvedores do Python.
+
+Python – suporte à criação de perfil   15.8.18201.1
+Suporte à criação de perfil para projetos do Python.
+
+Python – suporte ao Django   15.8.18201.1
+Fornece modelos e integração para a estrutura da Web do Django.
+
+Python – suporte do IronPython   15.8.18201.1
+Fornece modelos e integração para projetos com base em IronPython.
+
+Redgate ReadyRoll   1.17.18155.10346
+Extend DevOps processes to your SQL Server databases and safely automate database deployments.
+
+Visit https://www.red-gate.com/readyroll for more information.
+
+Copyright (C) 2011 Red Gate Software Ltd. All rights reserved.
+
+This software contains components from Component Owl.
+SQL Server is a registered trademark of Microsoft Corporation.
+Visual Studio is a registered trademark of Microsoft Corporation.
+
+ReadyRoll contains code from the following open source software:
+
+NuGet https://www.nuget.org/
+SQL LocalDB Wrapper https://github.com/martincostello/sqllocaldb
+Autofac https://autofac.org/
+Json.NET https://json.net/
+MahApps.Metro http://mahapps.com/
+SemVer https://github.com/maxhauser/semver
+Log4Net http://logging.apache.org/log4net/
+StringTemplate https://github.com/antlr/stringtemplate4
+Extended WPF Toolkit https://wpftoolkit.codeplex.com/
+Code InfoBox VSX http://www.codeproject.com/Articles/55196/Code-InfoBox-Visual-Studio-Extension-VSX
+OctoPack https://github.com/OctopusDeploy/OctoPack
+SQLite https://sqlite.org/
+
+This product contains icons from http://www.visualpharm.com distributed under a free backlink license.
+
+For license details or other notices relating to the above software, please see NOTICE.TXT and EULA.rtf in the ReadyRoll application folder.
+    
+
+Redgate SQL Prompt   9.2.0.5601
+Write, format, and refactor SQL effortlessly
+
+Serviço de Linguagem JavaScript   2.0
+Serviço de Linguagem JavaScript
+
+SQL Server Data Tools   15.1.61808.07020
+Microsoft SQL Server Data Tools
+
+ToolWindowHostedEditor   1.0
+Hosting json editor into a tool window
+
+Visual C++ para Desenvolvimento em Linux   1.0.9.27924
+Visual C++ para Desenvolvimento em Linux
+
+Visual F# Tools 10.2 para F# 4.5   15.8.0.0.  Commit Hash: c55dd2c3d618eb93a8d16e503947342b1fa93556.
+Microsoft Visual F# Tools 10.2 para F# 4.5
+
+Visual Studio Tools for Apache Cordova   15.123.7408.1
+Visual Studio Tools for Apache Cordova
+
+Visual Studio Tools para Aplicativo Universal do Windows   15.0.28010.00
+O Visual Studio Tools para aplicativo Universal do Windows permite que você crie uma experiência de aplicativo universal única que pode alcançar todos os dispositivos executando o Windows 10: telefone, tablet, PC e muito mais. Ele inclui o Microsoft Windows 10 Software Development Kit.
+
+VisualStudio.Mac   1.0
+Mac Extension for Visual Studio
+
+Xamarin   4.11.0.732 (d15-8@33e83e124)
+Extensão do Visual Studio para habilitar o desenvolvimento para o Xamarin.iOS e o Xamarin.Android.
+
+Xamarin Designer   4.14.218 (79f535bdd)
+Visual Studio extension to enable Xamarin Designer tools in Visual Studio.
+
+Xamarin Templates   1.1.113 (e1d02a7)
+Templates for building iOS, Android, and Windows apps with Xamarin and Xamarin.Forms.
+
+Xamarin.Android SDK   9.0.0.18 (HEAD/3d8a28f1a)
+Xamarin.Android Reference Assemblies and MSBuild support.
+
+Xamarin.iOS and Xamarin.Mac SDK   11.14.0.13 (373c313)
+Xamarin.iOS and Xamarin.Mac Reference Assemblies and MSBuild support.
