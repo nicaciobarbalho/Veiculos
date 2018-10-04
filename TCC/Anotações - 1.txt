@@ -1,9 +1,10 @@
 
 ASP.NET
-ASPX MVC - 5.2.4.0
+	ASPX MVC - 5.2.4.0
 .NET FrameWork 4.7.2
 EntityFramework - 6.0.0.0
 Jquery
+Bootstrap
 IOC - Repository (Criar uma imagem)
 
 Microsoft SQL Server 2016 (SP1) (KB3182545) - 13.0.4001.0 (X64)   Oct 28 2016 18:17:30   Copyright (c) Microsoft Corporation  Express Edition (64-bit) on Windows 10 Education 6.3 <X64> (Build 17134: ) 
