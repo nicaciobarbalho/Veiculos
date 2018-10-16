@@ -1,0 +1,55 @@
+
+Reunião 28/09/2018
+
+Objetivos
+O objetivo geral deste trabalho é relatar o projeto de software e implementação de uma aplicação web projetada para ser utilizada como exemplo em disciplinas de desenvolvimento de sistemas tais como Análise e Projeto Orientado a Objetos, Banco de Dados e Desenvolvimento Web. 
+
+Objetivos específicos:
+
+a) Apresentar a aplicação em questão e os seus requisitos.
+b) Relatar as tecnologias utilizadas;
+c) Descrever a solução tecnológica desenvolvida;
+d) Relatar as dificuldades encontradas durante a implementação e as lições aprendidas.
+
+
+Estrutura do TCC:
+
+Cap 1 - Introdução
+
+Breve contextualização e objetivos
+
+
+Cap 2 - Tecnologias Utilizadas
+
+Descrever sucintamente as tecnologias adotadas (o que é e pra que serve). Também justificar, a escolha de cada tecnologia.
+
+
+Cap 3 - O Sistema de Revenda de Veículos
+
+Descrever a aplicação em questão. Apresentar requisitos e casos de uso.
+
+
+Cap 4 - Resultados e discussões
+4.1 Arquitetura Lógica
+
+
+4.2 Modelo de dados
+Diagrama de banco de dados (tabelas) e descrição.
+
+
+4.3 Realização do caso de uso CRUD X
+
+Ver https://drive.google.com/file/d/0Bx5VasWf5EZ2X0FQeFdPd3hocU0/view
+
+4.4 Realização do caso de uso Registrar Venda
+
+Ver https://drive.google.com/file/d/0Bx5VasWf5EZ2X0FQeFdPd3hocU0/view
+
+4.5 Capturas de tela
+
+
+4.4 Dificuldades encontradas e lições aprendidas
+
+Cap. 5 - Conclusões
+
+Resumir o trabalho, as lições aprendidas, sua avaliação geral da tecnologia/sistema e citar trabalhos futuros.
