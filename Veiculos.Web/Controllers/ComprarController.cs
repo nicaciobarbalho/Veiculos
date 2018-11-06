@@ -148,11 +148,11 @@ namespace Veiculos.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Placa(string placa)
+        public JsonResult Placa(string placa, string veiculo)
         {
             Veiculos.Ioc.Service.Service<Ioc.Core.Data.Compra> service = new Ioc.Service.Service<Ioc.Core.Data.Compra>();
 
-            var result = (from c in service.BuscarTodos(g => g.Veiculo.IdStatusVeiculo == 1 && g.Veiculo.Placa.StartsWith(placa))
+            var result = (from c in service.BuscarTodos(g => g.Veiculo.IdStatusVeiculo == 3 && (g.Veiculo.Placa.StartsWith(placa) && !g.Veiculo.Placa.Equals(veiculo)))
                           select new
                           {
                               Id = c.Veiculo.Id,

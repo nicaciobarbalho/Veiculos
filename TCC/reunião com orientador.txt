@@ -24,10 +24,9 @@ Cap 2 - Tecnologias Utilizadas
 Descrever sucintamente as tecnologias adotadas (o que é e pra que serve). Também justificar, a escolha de cada tecnologia.
 
 
-Cap 3 - O Sistema de Revenda de Veículos
+Cap 3 - O Sistema de Revenda de Veículos - Entregar 01/11
 
 Descrever a aplicação em questão. Apresentar requisitos e casos de uso.
-
 
 Cap 4 - Resultados e discussões
 4.1 Arquitetura Lógica
@@ -53,3 +52,12 @@ Ver https://drive.google.com/file/d/0Bx5VasWf5EZ2X0FQeFdPd3hocU0/view
 Cap. 5 - Conclusões
 
 Resumir o trabalho, as lições aprendidas, sua avaliação geral da tecnologia/sistema e citar trabalhos futuros.
+
+------------------
+Reunião 30/10/2018
+
+Correção - 
+Na venda, não deve ir pra tela de cadastro de veículo, caso não exista;
+
+Não permitir escolha de parte de pagamento um veiculo já é loja.
+- deixar apenas veiculos que não pertecem a loja

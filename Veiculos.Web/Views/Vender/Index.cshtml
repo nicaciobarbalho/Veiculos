@@ -145,7 +145,7 @@
                                                         </thead>
                                                         <tbody id="tbPagamentos">
                                                             @if (Model.Pagamentos != null)
-                                                            {                                                                
+                                                            {
                                                                 foreach (var pag in Model.Pagamentos)
                                                                 {
                                                                     <tr id="trPagamento@{@pag.Index}">
@@ -169,8 +169,8 @@
                                                                             </div>
                                                                         </td>
                                                                     </tr>
-                                                                }
-                                                            }
+        }
+    }
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -184,7 +184,7 @@
                                         <input type="submit" value="Finalizar venda" class="btn btn-default" />
                                     </div>
                                 </div>
-                            }
+    }
                         </div>
                     </div>
                 </div>
@@ -202,11 +202,13 @@
         $("#Placa").autocomplete({
             source: function (request, response) {
                 console.log(request.term);
+                var veiculo = '@Model.Veiculo.Placa';
+
                 $.ajax({
                     url: "/Comprar/Placa",
                     type: "POST",
                     dataType: "json",
-                    data: { placa: request.term },
+                        data: { placa: request.term, veiculo: veiculo },
                     success: function (data) {
                         response($.map(data, function (item) {
                             console.log("Placa: " + item.Veiculo);

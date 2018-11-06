@@ -44,6 +44,10 @@ namespace Veiculos.Web.Controllers
                            
             if (veiculo == null || veiculo.Id == 0)
             {
+                if (controlador.Equals("Vender"))
+                {
+                    return View("Placa").WithInfo("Veículo não localizado!");
+                }
                 var cadastrarController = DependencyResolver.Current.GetService<CadastrarController>();
                 cadastrarController.ControllerContext = new ControllerContext(this.Request.RequestContext, cadastrarController);
 
