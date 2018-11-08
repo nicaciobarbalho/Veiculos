@@ -58,9 +58,11 @@ namespace Veiculos.Web.Controllers
                 return View("Veiculo", veiculo);
             }
 
-            Veiculos.Ioc.Service.Service<Ioc.Core.Data.Veiculo> serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
+            var serviceVeiculo = new Ioc.Service.Service<Ioc.Core.Data.Veiculo>();
 
-            if (serviceVeiculo.Buscar(v => v.Placa == veiculo.Placa) != null)
+            var v = serviceVeiculo.Buscar(f => f.Placa == veiculo.Placa);
+
+            if (v != null)
             {
                 this.CarregaComboModelo();
                 this.CarregaComboFabricante();
