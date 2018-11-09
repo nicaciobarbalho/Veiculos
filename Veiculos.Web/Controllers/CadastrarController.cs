@@ -83,10 +83,10 @@ namespace Veiculos.Web.Controllers
 
             if (!string.IsNullOrEmpty(origemFormulario))
             {
-                var controller = DependencyResolver.Current.GetService<ComprarController>();
-                controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+                var comprarController = DependencyResolver.Current.GetService<ComprarController>();
+                comprarController.ControllerContext = new ControllerContext(this.Request.RequestContext, comprarController);
 
-                var result = controller.PesquisarVeiculo(veiculo.Placa, "../Comprar");
+                var result = comprarController.PesquisarVeiculo(veiculo.Placa, "../Comprar");
 
                 return result;
             }
