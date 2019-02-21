@@ -48,6 +48,7 @@ namespace Veiculos.Web.Controllers
 
             return View();
         }
+
         [HttpPost]
         public ActionResult Veiculo(Veiculos.Web.Models.VeiculoModel veiculo, string origemFormulario)
         {
