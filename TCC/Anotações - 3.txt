@@ -4,3 +4,12 @@ https://www.google.com.br/imgres?imgurl=http%3A%2F%2Fsocial.technet.microsoft.co
 https://www.google.com.br/imgres?imgurl=https%3A%2F%2Fi.stack.imgur.com%2Fb8da2.png&imgrefurl=https%3A%2F%2Fsoftwareengineering.stackexchange.com%2Fquestions%2F170417%2Fmodular-enterprise-architecture-using-mvc-and-orchard-cms&docid=0cQ6HtnFCls5RM&tbnid=gbOlRJhBGS6kmM%3A&vet=10ahUKEwjZxqOsysDeAhVQvFMKHT9bDO4QMwh5KC0wLQ..i&w=1081&h=500&bih=938&biw=1920&q=ioc%20asp.net%20mvc%205&ved=0ahUKEwjZxqOsysDeAhVQvFMKHT9bDO4QMwh5KC0wLQ&iact=mrc&uact=8
 
 https://www.google.com.br/search?q=ioc+asp.net+mvc+5&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjozOqqysDeAhVBzVMKHRwxALgQ_AUIECgD&biw=1920&bih=938#imgrc=_
+
+
+-------------------
+
+
+
+https://www.devmedia.com.br/busca/?txtsearch=Modelo+DER&tipo=0&site=0
+https://www.devmedia.com.br/modelo-entidade-relacionamento-mer-e-diagrama-entidade-relacionamento-der/14332
+https://www.devmedia.com.br/modelagem-de-dados-conceitual-construindo-pontes-entre-dados-e-negocios/30597
